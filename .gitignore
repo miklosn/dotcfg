@@ -1,0 +1,8 @@
+
+# Devenv
+.devenv*
+devenv.local.nix
+.direnv/
+.DS_Store
+.pre-commit*
+.cfg/
