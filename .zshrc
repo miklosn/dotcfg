@@ -1,9 +1,8 @@
-export ZSH="/Users/mico/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="gallois"
 plugins=(git)
 
-# history:
 source $ZSH/oh-my-zsh.sh
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
@@ -17,7 +16,6 @@ setopt hist_verify
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-export CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 autoload -U +X bashcompinit && bashcompinit
 autoload -U compinit && compinit
@@ -30,13 +28,9 @@ eval "$(direnv hook zsh)"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 ### env gcloud
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 export PATH="$HOME/bin:$PATH:$HOME/go/bin:/usr/local/sbin"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/mico/.sdkman"
-[[ -s "/Users/mico/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/mico/.sdkman/bin/sdkman-init.sh"
-
 
 alias mtrr="sudo mtr -T -P 443 -e -z "
 
@@ -50,12 +44,14 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 export NIXPKGS_ALLOW_UNFREE=1
+
 eval "$(zellij setup --generate-completion zsh)"
 
 eval "$(zoxide init zsh)"
 alias cd="z"
 
 alias lvim="NVIM_APPNAME=nvim-lazyvim nvim"
+alias nvvim="NVIM_APPNAME=nvim-nvchad nvim"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
