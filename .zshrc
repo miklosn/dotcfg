@@ -55,3 +55,5 @@ alias nvvim="NVIM_APPNAME=nvim-nvchad nvim"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+eval "$(starship init zsh)"
+
