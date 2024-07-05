@@ -4,18 +4,17 @@
 # It's not necessary to copy all keys to your config.
 # If the key is missing in your config, "default-config.toml" will serve as a fallback
 
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 
-# You can use it to add commands that run after AeroSpace startup.
-# 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    'exec-and-forget borders active_color=0xffe78a4e inactive_color=0xff404344 width=5.0',
+    'workspace 1',
+]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -46,12 +45,12 @@ key-mapping.preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 0
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
+inner.horizontal = 6
+inner.vertical =   6
+outer.left =       6
+outer.bottom =     6
+outer.top =        6
+outer.right =      6
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
 [exec]                   # Again, you don't need to copy all config sections to your config.
@@ -118,12 +117,7 @@ alt-b = 'workspace B'
 alt-c = 'workspace C'
 alt-d = 'workspace D'
 alt-e = 'workspace E'
-alt-f = 'workspace F'
-alt-g = 'workspace G'
-alt-i = 'workspace I'
-alt-m = 'workspace M'
-alt-n = 'workspace N'
-alt-o = 'workspace O'
+            alt-o = 'workspace O'
 alt-p = 'workspace P'
 alt-q = 'workspace Q'
 alt-r = 'workspace R'
@@ -190,3 +184,24 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Finder'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = '1Password'
+run = 'layout floating'
+
+# P - Personal
+[[on-window-detected]]
+if.app-name-regex-substring = 'Telegram'
+run = 'move-node-to-workspace S'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Whatsapp'
+run = 'move-node-to-workspace S'
+
+
