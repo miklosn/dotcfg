@@ -23,7 +23,5 @@ return {
         path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/asd/",
       },
     },
-
-    -- see below for full list of options 👇
   },
 }

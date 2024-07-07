@@ -102,6 +102,16 @@ alt-shift-l = 'move right'
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
+# XXX
+alt-f = [
+   'layout floating tiling',
+   'mode main',
+] # Toggle between floating and tiling layout
+
+ctrl-alt-space = ['fullscreen']
+
+
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
@@ -117,7 +127,7 @@ alt-b = 'workspace B'
 alt-c = 'workspace C'
 alt-d = 'workspace D'
 alt-e = 'workspace E'
-            alt-o = 'workspace O'
+alt-o = 'workspace O'
 alt-p = 'workspace P'
 alt-q = 'workspace Q'
 alt-r = 'workspace R'
@@ -198,10 +208,26 @@ run = 'layout floating'
 # P - Personal
 [[on-window-detected]]
 if.app-name-regex-substring = 'Telegram'
-run = 'move-node-to-workspace S'
+run = 'move-node-to-workspace P'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Whatsapp'
-run = 'move-node-to-workspace S'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Mail'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Messages'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Todoist'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Google Chrome'
+run = 'move-node-to-workspace C'
 
 
