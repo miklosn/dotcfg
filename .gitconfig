@@ -16,7 +16,7 @@
 [user]
 	name = Miklos Niedermayer
 	email = miklos.niedermayer@aliz.ai
-	signingkey = /Users/mico/.ssh/id_rsa.pub
+  signingkey = /Users/mico/.ssh/id_rsa.pub
 [commit]
   gpgsign = true
 [gpg]

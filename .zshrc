@@ -56,5 +56,8 @@ alias nvvim="NVIM_APPNAME=nvim-nvchad nvim"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 compdef git config
 
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/catppuccin_mocha.omp.json)"
+
+
 

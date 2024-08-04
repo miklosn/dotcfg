@@ -11,22 +11,18 @@
 --  },
 --}
 --
+--
 
 return {
   {
-    "scottmckendry/cyberdream.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("cyberdream").setup({
-        italic_comments = true,
-      })
-    end,
+    "aliqyan-21/darkvoid.nvim",
   },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = false, opts = ... },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "cyberdream",
+      colorscheme = "catppuccin",
     },
   },
 }
