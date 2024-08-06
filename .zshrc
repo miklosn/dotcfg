@@ -1,9 +1,9 @@
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="gallois"
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 export HISTFILESIZE=1000000000
@@ -23,6 +23,7 @@ autoload -U compinit && compinit
 ### direnv:
 eval "$(direnv hook zsh)"
 ### end direnv
+#
 
 ### gcloud:
 source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
@@ -40,17 +41,17 @@ export PATH="/Users/mico/.rd/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 export NIXPKGS_ALLOW_UNFREE=1
 
-eval "$(zellij setup --generate-completion zsh)"
+#eval "$(zellij setup --generate-completion zsh)"
 
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-alias lvim="NVIM_APPNAME=nvim-lazyvim nvim"
 alias nvvim="NVIM_APPNAME=nvim-nvchad nvim"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -58,6 +59,5 @@ compdef git config
 
 #eval "$(starship init zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/catppuccin_mocha.omp.json)"
-
 
 
