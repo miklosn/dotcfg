@@ -60,4 +60,4 @@ compdef git config
 #eval "$(starship init zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/catppuccin_mocha.omp.json)"
 
-
+export EDITOR=nvim
