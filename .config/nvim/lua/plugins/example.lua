@@ -39,6 +39,9 @@ return {
       table.insert(opts.sources, { name = "emoji" })
     end,
   },
+  {
+    "rebelot/kanagawa.nvim",
+  },
 
   -- change some telescope options and a keymap to browse plugin files
   {

@@ -35,9 +35,25 @@ return {
     },
   },
   {
+    "slugbyte/lackluster.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+  },
+  { "rose-pine/neovim", name = "rose-pine" },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "lackluster-hack",
     },
   },
 }
