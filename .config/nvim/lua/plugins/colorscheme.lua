@@ -25,7 +25,6 @@ return {
       transparent_background = true,
     },
   },
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = false, opts = ... },
   {
     "eldritch-theme/eldritch.nvim",
     lazy = false,
@@ -48,12 +47,28 @@ return {
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
+    opts = {
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
+    },
   },
-  { "rose-pine/neovim", name = "rose-pine" },
+  {
+    "rktjmp/lush.nvim",
+    -- if you wish to use your own colorscheme:
+    -- { dir = '/absolute/path/to/colorscheme', lazy = true },
+  },
+
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "lackluster-hack",
+      colorscheme = "kanagawa-dragon",
     },
   },
 }

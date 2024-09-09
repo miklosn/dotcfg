@@ -7,6 +7,17 @@
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 
+# Run Sketchybar together with AeroSpace
+# sketchbar has a built-in detection of already running process,
+# so it won't be run twice on AeroSpace restart
+#after-startup-command = ['exec-and-forget /usr/local/bin/sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    '/usr/local/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 #after-startup-command = [
 #    'exec-and-forget borders active_color=0xffe78a4e inactive_color=0xff404344 width=5.0',
@@ -49,7 +60,7 @@ inner.horizontal = 20
 inner.vertical =   20
 outer.left =       12
 outer.bottom =     12
-outer.top =        12
+outer.top =        50
 outer.right =      12
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
