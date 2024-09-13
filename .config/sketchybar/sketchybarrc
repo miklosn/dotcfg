@@ -55,12 +55,12 @@ for sid in ${workspaces[@]}; do
         --set space.$sid \
         background.color=0xffC34043 \
         background.corner_radius=1 \
-        background.height=20 \
+        background.height=30 \
         background.drawing=off \
         background.border_color=0xffeeffff \
-        background.border_width=2 \
+        background.border_width=0 \
         label="$sid" \
-        geometry.width=24 \
+        geometry.width=32 \
         icon.drawing=off \
         label.align="center" \
         click_script="aerospace workspace $sid" \
