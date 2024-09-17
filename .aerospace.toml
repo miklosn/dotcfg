@@ -18,12 +18,6 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 ]
 
 
-# Available commands : https://nikitabobko.github.io/AeroSpace/commands
-#after-startup-command = [
-#    'exec-and-forget borders active_color=0xffe78a4e inactive_color=0xff404344 width=5.0',
-#    'workspace 1',
-#]
-
 # Start AeroSpace at login
 start-at-login = true
 
