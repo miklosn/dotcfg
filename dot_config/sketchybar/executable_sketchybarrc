@@ -1,0 +1,109 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top height=40 blur_radius=30 color=0xff222222
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="Hack Nerd Font Mono:Bold:17.0"
+  label.font="Hack Nerd Font Mono:Bold:14.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+####### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+# Some items refresh on a fixed cycle, e.g. the clock runs its script once
+# every 10s. Other items respond to events they subscribe to, e.g. the
+# volume.sh script is only executed once an actual change in system audio
+# volume is registered. More info about the event system can be found here:
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add event aerospace_workspace_change
+
+# aerospace list-workspaces --all
+workspaces=(1 2 3 4 5 6 7 8 9 A C E P V Z)
+
+for sid in ${workspaces[@]}; do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0xffC34043 \
+        background.corner_radius=1 \
+        background.height=30 \
+        background.drawing=off \
+        background.border_color=0xffeeffff \
+        background.border_width=0 \
+        label="$sid" \
+        geometry.width=32 \
+        icon.drawing=off \
+        label.align="center" \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+sketchybar --add item chevron center \
+           --set chevron icon= label.drawing=off \
+           --add item front_app center \
+           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+sketchybar --add item clock right \
+           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+
+sketchybar --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change \
+
+sketchybar --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --set battery background.color=0xffffeb3b \
+           --set battery background.height=30 \
+           --set battery background.corner_radius=1 \
+           --set battery label.color=0xff000000 \
+           --set battery icon.color=0xff000000 \
+           --set battery icon.color=0xff000000 \
+           --subscribe battery system_woke power_source_change
+           #background.shadow.drawing=on background.shadow.color=0xaaffffff \
+           #background.border_color=0xff000000 background.border_width=2 \
+
+
+sketchybar --add item inputlayout right \
+           --add event inputlayout_change "AppleSelectedInputSourcesChangedNotification" \
+           --subscribe inputlayout inputlayout_change \
+           --set inputlayout script="$PLUGIN_DIR/input_layout.sh" \
+           background.color=0xff42bcf5 \
+           background.height=30 \
+           background.corner_radius=1 \
+           geometry.width=32 \
+           icon.drawing=off \
+           label.color=0xff000000 \
+           icon.color=0xff000000 \
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update

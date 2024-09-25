@@ -1,0 +1,135 @@
+{
+	"name": "space.1",
+	"type": "item",
+	"geometry": {
+		"drawing": "on",
+		"position": "left",
+		"associated_space_mask": 0,
+		"associated_display_mask": 0,
+		"ignore_association": "off",
+		"y_offset": 0,
+		"width": 5,
+		"padding_left": 5,
+		"padding_right": -1,
+		"background": {
+			"drawing": "off",
+			"color": "0xffc34043",
+			"border_color": "0xffeeffff",
+			"border_width": 0,
+			"height": 40,
+			"corner_radius": 1,
+			"padding_left": 5,
+			"padding_right": 5,
+			"y_offset": 0,
+			"clip": 0.000000,
+			"image": {
+				"value": "(null)",
+				"drawing": "off",
+				"scale": 1.000000
+			},
+			"shadow": {
+				"drawing": "off",
+				"color": "0xff000000",
+				"angle": 30,
+				"distance": 5
+			}
+		}
+	},
+	"icon": {
+		"value": "",
+		"drawing": "off",
+		"highlight": "off",
+		"color": "0xffffffff",
+		"highlight_color": "0xff000000",
+		"padding_left": 4,
+		"padding_right": 4,
+		"y_offset": 0,
+		"font": "Hack Nerd Font Mono:Bold:17.00",
+		"width": 0,
+		"align": "left",
+		"background": {
+			"drawing": "off",
+			"color": "0x0",
+			"border_color": "0x0",
+			"border_width": 0,
+			"height": 0,
+			"corner_radius": 0,
+			"padding_left": 0,
+			"padding_right": 0,
+			"y_offset": 0,
+			"clip": 0.000000,
+			"image": {
+				"value": "(null)",
+				"drawing": "off",
+				"scale": 1.000000
+			},
+			"shadow": {
+				"drawing": "off",
+				"color": "0xff000000",
+				"angle": 30,
+				"distance": 5
+			}
+		},
+		"shadow": {
+			"drawing": "off",
+			"color": "0xff000000",
+			"angle": 30,
+			"distance": 5
+		}
+	},
+	"label": {
+		"value": "1",
+		"drawing": "on",
+		"highlight": "off",
+		"color": "0xffffffff",
+		"highlight_color": "0xff000000",
+		"padding_left": 4,
+		"padding_right": 4,
+		"y_offset": 0,
+		"font": "Hack Nerd Font Mono:Bold:14.00",
+		"width": 0,
+		"align": "center",
+		"background": {
+			"drawing": "off",
+			"color": "0x0",
+			"border_color": "0x0",
+			"border_width": 0,
+			"height": 0,
+			"corner_radius": 0,
+			"padding_left": 0,
+			"padding_right": 0,
+			"y_offset": 0,
+			"clip": 0.000000,
+			"image": {
+				"value": "(null)",
+				"drawing": "off",
+				"scale": 1.000000
+			},
+			"shadow": {
+				"drawing": "off",
+				"color": "0xff000000",
+				"angle": 30,
+				"distance": 5
+			}
+		},
+		"shadow": {
+			"drawing": "off",
+			"color": "0xff000000",
+			"angle": 30,
+			"distance": 5
+		}
+	},
+	"scripting": {
+		"script": "/Users/mico/.config/sketchybar/plugins/aerospace.sh 1",
+		"click_script": "aerospace workspace 1",
+		"update_freq": 0,
+		"update_mask": 262144,
+		"updates": "on"
+	},
+	"bounding_rects": {
+		"display-1": {
+			"origin": [ 25.000000, 0.000000 ],
+			"size": [ 16.000000, 40.000000 ]
+		}
+	}
+}
