@@ -1,0 +1,27 @@
+[credential "https://source.developers.google.com"]
+	helper = gcloud.sh
+[http]
+	cookiefile = /Users/mico/.gitcookies
+  #proxy = http://127.0.0.1:8888
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[credential]
+	helper = osxkeychain
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
+[user]
+	name = Miklos Niedermayer
+	email = miklos.niedermayer@aliz.ai
+  signingkey = /Users/mico/.ssh/id_rsa.pub
+[commit]
+  gpgsign = true
+[gpg]
+	format = ssh
+[diff "sopsdiffer"]
+	textconv = sops -d
+[core]
+	excludesfile = /Users/mico/.gitignore
