@@ -21,6 +21,7 @@ autoload -U compinit && compinit
 # darwin
 {{ else if eq .chezmoi.os "linux" }}
 export TERM=xterm-256color
+export PATH=$PATH:/home/mico.linux/.local/bin
 {{ else }}
 # other operating system
 {{ end }}
