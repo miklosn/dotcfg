@@ -105,5 +105,14 @@ sketchybar --add item inputlayout right \
            label.color=0xff000000 \
            icon.color=0xff000000 \
 
+sketchybar --add item lima right \
+           --set lima update_freq=120 script="$PLUGIN_DIR/lima.sh" \
+           --set lima background.color=0xff5d8aa8 \
+           --set lima background.height=30 \
+           --set lima background.corner_radius=1 \
+           --set lima label.color=0xff000000 \
+           --set lima icon.color=0xff000000 \
+           --set lima icon.color=0xff000000 \
+
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
