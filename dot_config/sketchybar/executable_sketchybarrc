@@ -67,6 +67,9 @@ for sid in ${workspaces[@]}; do
         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
+sketchybar --add item aerospace_mode left \
+           --set aerospace_mode icon.drawing=off label="Aerospace" drawing=off
+
 sketchybar --add item chevron center \
            --set chevron icon= label.drawing=off \
            --add item front_app center \
@@ -91,7 +94,6 @@ sketchybar --add item battery right \
            --subscribe battery system_woke power_source_change
            #background.shadow.drawing=on background.shadow.color=0xaaffffff \
            #background.border_color=0xff000000 background.border_width=2 \
-
 
 sketchybar --add item inputlayout right \
            --add event inputlayout_change "AppleSelectedInputSourcesChangedNotification" \
