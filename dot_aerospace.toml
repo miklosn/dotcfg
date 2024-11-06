@@ -41,6 +41,7 @@ default-root-container-orientation = 'auto'
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 key-mapping.preset = 'qwerty'
+on-focus-changed = ['move-mouse window-lazy-center'] # Mouse lazily follows any focus (window or workspace)
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
