@@ -221,11 +221,12 @@ esc = ['mode main', 'exec-and-forget /usr/local/bin/sketchybar --bar color=0xff2
 7 = 'workspace 7'
 8 = 'workspace 8'
 9 = 'workspace 9'
-alt-e = 'workspace E'
-alt-p = 'workspace P'
-alt-v = 'workspace V'
-alt-w = 'workspace V'
-alt-z = 'workspace Z'
+c = 'workspace C'
+e = 'workspace E'
+p = 'workspace P'
+v = 'workspace V'
+w = 'workspace W'
+z = 'workspace Z'
 
 
 [[on-window-detected]]
