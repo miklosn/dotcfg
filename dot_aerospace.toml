@@ -208,7 +208,7 @@ j = 'focus down'
 k = 'focus up'
 l = 'focus right'
 
-esc = 'mode main'
+esc = ['mode main', 'exec-and-forget /usr/local/bin/sketchybar --bar color=0xff222222']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Finder'
