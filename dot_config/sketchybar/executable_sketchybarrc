@@ -47,7 +47,7 @@ sketchybar --default "${default[@]}"
 sketchybar --add event aerospace_workspace_change
 
 # aerospace list-workspaces --all
-workspaces=(1 2 3 4 5 6 7 8 9 A C E P V Z)
+workspaces=(1 2 3 4 5 6 7 8 9 C E P V W Z)
 
 for sid in ${workspaces[@]}; do
     sketchybar --add item space.$sid left \
