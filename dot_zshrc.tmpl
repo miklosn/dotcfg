@@ -17,7 +17,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 autoload -U +X bashcompinit && bashcompinit
 autoload -U compinit && compinit
 
-source "$HOME/zsh-vim-mode.plugin.zsh"
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 
 {{ if eq .chezmoi.os "darwin" }}
