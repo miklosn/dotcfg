@@ -3,6 +3,8 @@ theme = "tokyonight"
 [editor]
 line-number = "relative"
 end-of-line-diagnostics = "hint"
+jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
+bufferline = "always"
 
 [editor.inline-diagnostics]
 # Minimum severity to show a diagnostic on the primary cursor's line.
@@ -28,4 +30,9 @@ separator = "│"
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
+
+[keys.normal]
+"ret" = "goto_word"
+
+
 

@@ -1,2 +1,2 @@
 [opener]
-edit = [{ run = 'nvim "$@"', block = true }]
+edit = [{ run = 'hx "$@"', block = true }]

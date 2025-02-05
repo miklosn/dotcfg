@@ -17,6 +17,7 @@ return {
   {
     "aliqyan-21/darkvoid.nvim",
   },
+  { "ntk148v/habamax.nvim", dependencies = { "rktjmp/lush.nvim" } },
   {
     "catppuccin/nvim",
     name = "catppuccin",
