@@ -7,6 +7,9 @@ case $CURRENT_LAYOUT in
 com.apple.keylayout.US)
   VAL="US"
   ;;
+com.apple.keylayout.USInternational-PC)
+  VAL="US"
+  ;;
 com.apple.keylayout.Hungarian)
   VAL="HU"
   ;;
