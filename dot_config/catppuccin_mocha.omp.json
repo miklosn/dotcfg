@@ -1,55 +1,61 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "palette": {
-    "os": "#ACB0BE",
+    "blue": "#89B4FA",
     "closer": "p:os",
-    "pink": "#F5C2E7",
     "lavender": "#B4BEFE",
-    "blue": "#89B4FA"
+    "os": "#ACB0BE",
+    "pink": "#F5C2E7"
   },
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "p:os",
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": "{{.Icon}} ",
-          "type": "os"
+          "foreground": "p:os",
+          "type": "os",
+          "style": "plain"
         },
         {
+          "properties": {
+            "cache_duration": "none",
+            "charged_icon": "\ue22f ",
+            "charging_icon": "\ue234 ",
+            "discharging_icon": "\ue231 "
+          },
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}\uf295 ",
+          "foreground": "#193549",
+          "powerline_symbol": "\ue0b0",
+          "background": "#ffeb3b",
           "type": "battery",
           "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#193549",
-          "background": "#ffeb3b",
           "background_templates": [
             "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}",
             "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}",
             "{{if eq \"Full\" .State.String}}#4caf50{{end}}"
-          ],
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
-          "properties": {
-            "discharging_icon": " ",
-            "charging_icon": " ",
-            "charged_icon": " "
-          }
+          ]
         },
         {
-          "foreground": "p:pink",
           "properties": {
+            "cache_duration": "none",
             "folder_icon": "..\ue5fe..",
             "home_icon": "~",
             "style": "agnoster_short"
           },
-          "style": "plain",
           "template": "{{ .Path }} ",
-          "type": "path"
+          "foreground": "p:pink",
+          "type": "path",
+          "style": "plain"
         },
         {
-          "foreground": "p:lavender",
           "properties": {
             "branch_icon": "\ue725 ",
+            "cache_duration": "none",
             "cherry_pick_icon": "\ue29b ",
             "commit_icon": "\uf417 ",
             "fetch_status": false,
@@ -61,34 +67,29 @@
             "tag_icon": "\uf412 "
           },
           "template": "{{ .HEAD }} ",
-          "style": "plain",
-          "type": "git"
+          "foreground": "p:lavender",
+          "type": "git",
+          "style": "plain"
         },
         {
-          "style": "plain",
-          "foreground": "p:closer",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": "\uf105",
-          "type": "text"
+          "foreground": "p:closer",
+          "type": "text",
+          "style": "plain"
         },
         {
+          "properties": {
+            "cache_duration": "none"
+          },
           "type": "prompt",
-          "style": "plain",
-          "segments": [
-            {
-              "type": "command",
-              "style": "plain",
-              "foreground": "#ffffff",
-              "properties": {
-                "shell": "bash",
-                "command": "system_profiler SPPowerDataType | grep Wattage | awk '{print $3}'"
-              }
-            }
-          ]
+          "style": "plain"
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ],
-  "final_space": true,
-  "version": 2
+  "version": 3,
+  "final_space": true
 }
