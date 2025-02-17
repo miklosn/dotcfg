@@ -27,16 +27,4 @@ return {
       },
     },
   },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        clangd = {
-          setup = {
-            filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
-          },
-        },
-      },
-    },
-  },
 }

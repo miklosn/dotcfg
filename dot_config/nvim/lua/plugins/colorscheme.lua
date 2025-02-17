@@ -17,13 +17,12 @@ return {
   {
     "aliqyan-21/darkvoid.nvim",
   },
-  { "ntk148v/habamax.nvim", dependencies = { "rktjmp/lush.nvim" } },
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
     opts = {
-      transparent_background = true,
+      transparent_background = false,
     },
   },
   {
@@ -31,7 +30,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = true,
+      transparent = false,
     },
   },
   {
@@ -69,7 +68,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "eldritch",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }

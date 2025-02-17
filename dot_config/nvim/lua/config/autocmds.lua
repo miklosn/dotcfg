@@ -3,4 +3,6 @@
 -- Add any additional autocmds here
 --
 
+vim.lsp.set_log_level("debug")
+
 -- Define the color palette
