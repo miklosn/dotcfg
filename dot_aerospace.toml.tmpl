@@ -111,6 +111,10 @@ alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
+alt-ctrl-h = 'join-with left'
+alt-ctrl-j = 'join-with down'
+alt-ctrl-k = 'join-with up'
+alt-ctrl-l = 'join-with right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
@@ -123,7 +127,16 @@ alt-f = [
 ] # Toggle between floating and tiling layout
 
 ctrl-alt-space = ['fullscreen']
-
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+a
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -219,27 +232,27 @@ run = 'layout floating'
 # P - Personal
 [[on-window-detected]]
 if.app-name-regex-substring = 'Telegram'
-run = 'move-node-to-workspace P'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Whatsapp'
-run = 'move-node-to-workspace P'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Mail'
-run = 'move-node-to-workspace P'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Messages'
-run = 'move-node-to-workspace P'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Todoist'
-run = 'move-node-to-workspace C'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Google Chrome'
-run = 'move-node-to-workspace C'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Toggl Track'
