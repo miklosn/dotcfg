@@ -3,12 +3,31 @@
 [http]
 	cookiefile = /Users/mico/.gitcookies
   #proxy = http://127.0.0.1:8888
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+
 [credential]
 	helper = osxkeychain
 #[url "git@github.com:"]
@@ -25,3 +44,16 @@
 	textconv = sops -d
 [core]
 	excludesfile = /Users/mico/.gitignore
+
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
