@@ -6,3 +6,4 @@ devenv.local.nix
 .DS_Store
 .pre-commit*
 .cfg/
+.aider*
