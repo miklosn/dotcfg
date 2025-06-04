@@ -47,24 +47,54 @@ sketchybar --default "${default[@]}"
 sketchybar --add event aerospace_workspace_change
 
 # aerospace list-workspaces --all
+# Define workspace labels - add more as needed
+declare -A workspace_labels
+workspace_labels[9]="prv"
+
 workspaces=(1 2 3 4 5 6 7 8 9)
 
 for sid in ${workspaces[@]}; do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color=0xffC34043 \
-        background.corner_radius=1 \
-        background.height=30 \
-        background.drawing=off \
-        background.border_color=0xffeeffff \
-        background.border_width=0 \
-        label="$sid" \
-        geometry.width=32 \
-        icon.drawing=off \
-        label.align="center" \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+    if [ -n "${workspace_labels[$sid]}" ]; then
+        # Workspace has a custom label
+        sketchybar --add item space.$sid left \
+            --subscribe space.$sid aerospace_workspace_change \
+            --set space.$sid \
+            background.color=0xffC34043 \
+            background.corner_radius=1 \
+            background.height=30 \
+            background.drawing=off \
+            background.border_color=0xffeeffff \
+            background.border_width=0 \
+            icon="$sid" \
+            icon.font="Hack Nerd Font Mono:Bold:14.0" \
+            icon.color=0xffffffff \
+            icon.padding_left=4 \
+            icon.padding_right=2 \
+            label="${workspace_labels[$sid]}" \
+            label.font="Hack Nerd Font Mono:Regular:10.0" \
+            label.color=0xff888888 \
+            geometry.width=50 \
+            label.align="center" \
+            click_script="aerospace workspace $sid" \
+            script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+    else
+        # Regular workspace with just number
+        sketchybar --add item space.$sid left \
+            --subscribe space.$sid aerospace_workspace_change \
+            --set space.$sid \
+            background.color=0xffC34043 \
+            background.corner_radius=1 \
+            background.height=30 \
+            background.drawing=off \
+            background.border_color=0xffeeffff \
+            background.border_width=0 \
+            label="$sid" \
+            geometry.width=32 \
+            icon.drawing=off \
+            label.align="center" \
+            click_script="aerospace workspace $sid" \
+            script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+    fi
 done
 
 sketchybar --add item aerospace_mode left \
