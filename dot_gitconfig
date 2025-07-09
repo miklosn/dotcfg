@@ -37,7 +37,7 @@
 	email = miklos.niedermayer@aliz.ai
   signingkey = /Users/mico/.ssh/id_rsa.pub
 [commit]
-  gpgsign = true
+  gpgsign = false
 [gpg]
 	format = ssh
 [diff "sopsdiffer"]
@@ -57,3 +57,8 @@
         autoSquash = true
         autoStash = true
         updateRefs = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
