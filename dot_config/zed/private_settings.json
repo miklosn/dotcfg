@@ -1,0 +1,148 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "vim_mode": true,
+  "theme": "Neovim default dark",
+  "icon_theme": "Zed (Default)",
+  "buffer_font_family": "Iosevka",
+  "ui_font_family": "Iosevka",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "buffer_line_height": "standard",
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "soft_wrap": "preferred_line_length",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": true
+  },
+  "toolbar": {
+    // Whether to show breadcrumbs.
+    "breadcrumbs": true,
+    // Whether to show quick action buttons.
+    "quick_actions": true,
+    // Whether to show the Selections menu in the editor toolbar.
+    "selections_menu": true,
+    // Whether to show agent review buttons in the editor toolbar.
+    "agent_review": true,
+    // Whether to show code action buttons in the editor toolbar.
+    "code_actions": true
+  },
+  "title_bar": {
+    // Whether to show the branch icon beside branch switcher in the titlebar.
+    "show_branch_icon": true,
+    // Whether to show the branch name button in the titlebar.
+    "show_branch_name": true,
+    // Whether to show the project host and name in the titlebar.
+    "show_project_items": true,
+    // Whether to show onboarding banners in the titlebar.
+    "show_onboarding_banner": true,
+    // Whether to show user picture in the titlebar.
+    "show_user_picture": true,
+    // Whether to show the sign in button in the titlebar.
+    "show_sign_in": true
+  },
+  "active_pane_modifiers": {
+    // Inset border size of the active pane, in pixels.
+    "border_size": 0.5,
+    // Opacity of the inactive panes. 0 means transparent, 1 means opaque.
+    // Values are clamped to the [0.0, 1.0] range.
+    "inactive_opacity": 0.8
+  },
+  "indent_guides": {
+    // Whether to show indent guides in the editor.
+    "enabled": true,
+    // The width of the indent guides in pixels, between 1 and 10.
+    "line_width": 1,
+    // The width of the active indent guide in pixels, between 1 and 10.
+    "active_line_width": 4,
+    // Determines how indent guides are colored.
+    // This setting can take the following three values:
+    //
+    // 1. "disabled"
+    // 2. "fixed"
+    // 3. "indent_aware"
+    "coloring": "indent_aware",
+    // Determines how indent guide backgrounds are colored.
+    // This setting can take the following two values:
+    //
+    // 1. "disabled"
+    // 2. "indent_aware"
+    "background_coloring": "disabled"
+  },
+  "tab_bar": {
+    // Whether or not to show the tab bar in the editor
+    "show": true,
+    // Whether or not to show the navigation history buttons.
+    "show_nav_history_buttons": false,
+    // Whether or not to show the tab bar buttons.
+    "show_tab_bar_buttons": true
+  },
+  "tabs": {
+    // Show git status colors in the editor tabs.
+    "git_status": true,
+    // Position of the close button on the editor tabs.
+    // One of: ["right", "left", "hidden"]
+    "close_position": "right",
+    // Whether to show the file icon for a tab.
+    "file_icons": true,
+    // Controls the appearance behavior of the tab's close button.
+    //
+    // 1. Show it just upon hovering the tab. (default)
+    //     "hover"
+    // 2. Show it persistently.
+    //     "always"
+    // 3. Never show it, even if hovering it.
+    //     "hidden"
+    "show_close_button": "hover",
+    // What to do after closing the current tab.
+    //
+    // 1. Activate the tab that was open previously (default)
+    //     "history"
+    // 2. Activate the right neighbour tab if present
+    //     "neighbour"
+    // 3. Activate the left neighbour tab if present
+    //     "left_neighbour"
+    "activate_on_close": "history",
+    // Which files containing diagnostic errors/warnings to mark in the tabs.
+    // Diagnostics are only shown when file icons are also active.
+    // This setting only works when can take the following three values:
+    //
+    // 1. Do not mark any files:
+    //    "off"
+    // 2. Only mark files with errors:
+    //    "errors"
+    // 3. Mark files with errors and warnings:
+    //    "all"
+    "show_diagnostics": "all"
+  },
+  "restore_on_startup": "none",
+  "context_servers": {
+    "taskmaster": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["-y", "--package=task-master-ai", "task-master-ai"],
+      "env": {
+        "OPENROUTER_API_KEY": "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"
+      }
+    }
+  },
+  "vim": {
+    "default_mode": "normal",
+    "toggle_relative_line_numbers": true,
+    "use_system_clipboard": "always",
+    "use_smartcase_find": false,
+    "highlight_on_yank_duration": 200,
+    "custom_digraphs": {},
+    // Cursor shape for the each mode.
+    // Specify the mode as the key and the shape as the value.
+    // The mode can be one of the following: "normal", "replace", "insert", "visual".
+    // The shape can be one of the following: "block", "bar", "underline", "hollow".
+    "cursor_shape": {}
+  }
+}
