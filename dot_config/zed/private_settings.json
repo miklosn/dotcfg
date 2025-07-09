@@ -127,9 +127,7 @@
       "source": "custom",
       "command": "npx",
       "args": ["-y", "--package=task-master-ai", "task-master-ai"],
-      "env": {
-        "OPENROUTER_API_KEY": "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"
-      }
+      "env": {}
     }
   },
   "vim": {
