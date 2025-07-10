@@ -21,6 +21,10 @@
     "diagnostics": false,
     "metrics": true
   },
+  "features": {
+    // Which edit prediction provider to use.
+    "edit_prediction_provider": "copilot"
+  },
   "toolbar": {
     // Whether to show breadcrumbs.
     "breadcrumbs": true,
@@ -142,5 +146,162 @@
     // The mode can be one of the following: "normal", "replace", "insert", "visual".
     // The shape can be one of the following: "block", "bar", "underline", "hollow".
     "cursor_shape": {}
+  },
+  "terminal": {
+    // What shell to use when opening a terminal. May take 3 values:
+    // 1. Use the system's default terminal configuration in /etc/passwd
+    //      "shell": "system"
+    // 2. A program:
+    //      "shell": {
+    //        "program": "sh"
+    //      }
+    // 3. A program with arguments:
+    //     "shell": {
+    //         "with_arguments": {
+    //           "program": "/bin/bash",
+    //           "args": ["--login"]
+    //         }
+    //     }
+    "shell": "system",
+    // Where to dock terminals panel. Can be `left`, `right`, `bottom`.
+    "dock": "bottom",
+    // Default width when the terminal is docked to the left or right.
+    "default_width": 640,
+    // Default height when the terminal is docked to the bottom.
+    "default_height": 320,
+    // What working directory to use when launching the terminal.
+    // May take 4 values:
+    // 1. Use the current file's project directory.  Will Fallback to the
+    //    first project directory strategy if unsuccessful
+    //      "working_directory": "current_project_directory"
+    // 2. Use the first project in this workspace's directory
+    //      "working_directory": "first_project_directory"
+    // 3. Always use this platform's home directory (if we can find it)
+    //     "working_directory": "always_home"
+    // 4. Always use a specific directory. This value will be shell expanded.
+    //    If this path is not a valid directory the terminal will default to
+    //    this platform's home directory  (if we can find it)
+    //      "working_directory": {
+    //        "always": {
+    //          "directory": "~/zed/projects/"
+    //        }
+    //      }
+    "working_directory": "current_project_directory",
+    // Set the cursor blinking behavior in the terminal.
+    // May take 3 values:
+    //  1. Never blink the cursor, ignoring the terminal mode
+    //         "blinking": "off",
+    //  2. Default the cursor blink to off, but allow the terminal to
+    //     set blinking
+    //         "blinking": "terminal_controlled",
+    //  3. Always blink the cursor, ignoring the terminal mode
+    //         "blinking": "on",
+    "blinking": "terminal_controlled",
+    // Default cursor shape for the terminal.
+    //  1. A block that surrounds the following character
+    //     "block"
+    //  2. A vertical bar
+    //     "bar"
+    //  3. An underline / underscore that runs along the following character
+    //     "underline"
+    //  4. A box drawn around the following character
+    //     "hollow"
+    //
+    // Default: not set, defaults to "block"
+    "cursor_shape": null,
+    // Set whether Alternate Scroll mode (code: ?1007) is active by default.
+    // Alternate Scroll mode converts mouse scroll events into up / down key
+    // presses when in the alternate screen (e.g. when running applications
+    // like vim or  less). The terminal can still set and unset this mode.
+    // May take 2 values:
+    //  1. Default alternate scroll mode to on
+    //         "alternate_scroll": "on",
+    //  2. Default alternate scroll mode to off
+    //         "alternate_scroll": "off",
+    "alternate_scroll": "on",
+    // Set whether the option key behaves as the meta key.
+    // May take 2 values:
+    //  1. Rely on default platform handling of option key, on macOS
+    //     this means generating certain unicode characters
+    //         "option_as_meta": false,
+    //  2. Make the option keys behave as a 'meta' key, e.g. for emacs
+    //         "option_as_meta": true,
+    "option_as_meta": false,
+    // Whether or not selecting text in the terminal will automatically
+    // copy to the system clipboard.
+    "copy_on_select": false,
+    // Whether to show the terminal button in the status bar
+    "button": true,
+    // Any key-value pairs added to this list will be added to the terminal's
+    // environment. Use `:` to separate multiple values.
+    "env": {
+      // "KEY": "value1:value2"
+    },
+    // Set the terminal's line height.
+    // May take 3 values:
+    //  1. Use a line height that's comfortable for reading, 1.618
+    //         "line_height": "comfortable"
+    //  2. Use a standard line height, 1.3. This option is useful for TUIs,
+    //      particularly if they use box characters
+    //         "line_height": "standard",
+    //  3. Use a custom line height.
+    //         "line_height": {
+    //           "custom": 2
+    //         },
+    "line_height": "standard",
+    // Activate the python virtual environment, if one is found, in the
+    // terminal's working directory (as resolved by the working_directory
+    // setting). Set this to "off" to disable this behavior.
+    "detect_venv": {
+      "on": {
+        // Default directories to search for virtual environments, relative
+        // to the current working directory. We recommend overriding this
+        // in your project's settings, rather than globally.
+        "directories": [".env", "env", ".venv", "venv"],
+        // Can also be `csh`, `fish`, `nushell` and `power_shell`
+        "activate_script": "default"
+      }
+    },
+    "toolbar": {
+      // Whether to display the terminal title in its toolbar's breadcrumbs.
+      // Only shown if the terminal title is not empty.
+      //
+      // The shell running in the terminal needs to be configured to emit the title.
+      // Example: `echo -e "\e]2;New Title\007";`
+      "breadcrumbs": true
+    },
+    // Scrollbar-related settings
+    "scrollbar": {
+      // When to show the scrollbar in the terminal.
+      // This setting can take five values:
+      //
+      // 1. null (default): Inherit editor settings
+      // 2. Show the scrollbar if there's important information or
+      //    follow the system's configured behavior (default):
+      //   "auto"
+      // 3. Match the system's configured behavior:
+      //    "system"
+      // 4. Always show the scrollbar:
+      //    "always"
+      // 5. Never show the scrollbar:
+      //    "never"
+      "show": null
+    },
+    // Set the terminal's font size. If this option is not included,
+    // the terminal will default to matching the buffer's font size.
+    "font_size": 13,
+    // Set the terminal's font family. If this option is not included,
+    // the terminal will default to matching the buffer's font family.
+    "font_family": "Agave Nerd Font Mono",
+    // Set the terminal's font fallbacks. If this option is not included,
+    // the terminal will default to matching the buffer's font fallbacks.
+    // This will be merged with the platform's default font fallbacks
+    "font_fallbacks": ["0xProto"]
+    // The weight of the editor font in standard CSS units from 100 to 900.
+    // "font_weight": 400
+    // Sets the maximum number of lines in the terminal's scrollback buffer.
+    // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
+    // Existing terminals will not pick up this change until they are recreated.
+    // "max_scroll_history_lines": 10000,
   }
 }
