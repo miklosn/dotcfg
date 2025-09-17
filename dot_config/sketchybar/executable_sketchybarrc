@@ -100,18 +100,18 @@ done
 sketchybar --add item aerospace_mode left \
            --set aerospace_mode icon.drawing=off label="Aerospace" drawing=off
 
-sketchybar --add item chevron center \
-           --set chevron icon= label.drawing=off \
-           --add item front_app center \
+sketchybar --add item chevron left \
+           --set chevron icon= label.drawing=off \
+           --add item front_app left \
            --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh"
 
 sketchybar --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change \
+           --subscribe volume volume_change
 
 sketchybar --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
@@ -120,10 +120,17 @@ sketchybar --add item battery right \
            --set battery background.corner_radius=1 \
            --set battery label.color=0xff000000 \
            --set battery icon.color=0xff000000 \
-           --set battery icon.color=0xff000000 \
            --subscribe battery system_woke power_source_change
-           #background.shadow.drawing=on background.shadow.color=0xaaffffff \
-           #background.border_color=0xff000000 background.border_width=2 \
+
+sketchybar --add item wifi right \
+           --set wifi update_freq=10 icon= script="$PLUGIN_DIR/wifi.sh" \
+           --set wifi background.color=0xff48c774 \
+           --set wifi background.height=30 \
+           --set wifi background.corner_radius=1 \
+           --set wifi label.color=0xff000000 \
+           --set wifi icon.color=0xff000000 \
+           --set wifi click_script="$PLUGIN_DIR/wifi_toggle.sh" \
+           --subscribe wifi system_woke
 
 sketchybar --add item inputlayout right \
            --add event inputlayout_change "AppleSelectedInputSourcesChangedNotification" \
@@ -135,7 +142,7 @@ sketchybar --add item inputlayout right \
            geometry.width=32 \
            icon.drawing=off \
            label.color=0xff000000 \
-           icon.color=0xff000000 \
+           icon.color=0xff000000
 
 sketchybar --add item lima right \
            --set lima update_freq=120 script="$PLUGIN_DIR/lima.sh" \
@@ -144,7 +151,18 @@ sketchybar --add item lima right \
            --set lima background.corner_radius=1 \
            --set lima label.color=0xff000000 \
            --set lima icon.color=0xff000000 \
-           --set lima icon.color=0xff000000 \
+           --set lima icon.color=0xff000000
+
+sketchybar --add item orbstack right \
+           --set orbstack update_freq=10 script="$PLUGIN_DIR/orbstack.sh" \
+           --set orbstack background.color=0xffff5555 \
+           --set orbstack background.height=30 \
+           --set orbstack background.corner_radius=1 \
+           --set orbstack label.color=0xffffffff \
+           --set orbstack icon.color=0xffffffff \
+           --set orbstack label.font="Hack Nerd Font Mono:Bold:10.0" \
+           --set orbstack click_script="$PLUGIN_DIR/orbstack_toggle.sh" \
+           --subscribe orbstack system_woke
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
