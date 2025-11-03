@@ -1,7 +1,16 @@
 #!/bin/sh
 
+# Pastel color palette
+PASTEL_YELLOW=0xfff9e2af
+TEXT_DARK=0xff1e1e2e
+
 # Show toggling state
-sketchybar --set wifi label="Toggling..." background.color=0xffff9500 icon=
+sketchybar --set wifi label="Toggling..." \
+           label.font="Hack Nerd Font Mono:Medium:12.0" \
+           background.color=$PASTEL_YELLOW \
+           label.color=$TEXT_DARK \
+           label.padding_left=10 \
+           label.padding_right=10
 
 # Turn off WiFi
 networksetup -setairportpower en0 off
@@ -13,13 +22,15 @@ sleep 1
 networksetup -setairportpower en0 on
 
 # Show reconnecting state
-sketchybar --set wifi label="Connecting..." background.color=0xff007aff icon=󰤨
+sketchybar --set wifi label="Connecting..." \
+           label.font="Hack Nerd Font Mono:Medium:12.0" \
+           background.color=$PASTEL_YELLOW \
+           label.color=$TEXT_DARK \
+           label.padding_left=10 \
+           label.padding_right=10
 
 # Wait a bit for connection
 sleep 2
-
-# Reset to normal color and update status
-sketchybar --set wifi background.color=0xff48c774 icon=
 
 # Force update of the WiFi status
 $CONFIG_DIR/plugins/wifi.sh

@@ -1,53 +1,60 @@
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
+#!/bin/bash
+
+# SketchyBar Configuration - Uniform Design System
+# All items follow the same visual language with consistent spacing, colors, and typography
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
+##### Color Palette (Catppuccin Mocha) #####
+BAR_COLOR=0xe01e1e2e
+BG_PRIMARY=0xff313244
+BG_SECONDARY=0xff45475a
+TEXT_PRIMARY=0xffcdd6f4
+TEXT_SECONDARY=0xffa6adc8
+ACCENT_BLUE=0xff89b4fa
+ACCENT_GREEN=0xffa6e3a1
+ACCENT_YELLOW=0xfff9e2af
+ACCENT_RED=0xfff38ba8
+ACCENT_MAUVE=0xffcba6f7
+
 ##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+sketchybar --bar position=top \
+                 height=38 \
+                 margin=0 \
+                 y_offset=0 \
+                 corner_radius=0 \
+                 blur_radius=30 \
+                 color=$BAR_COLOR \
+                 shadow=off \
+                 sticky=on \
+                 padding_left=16 \
+                 padding_right=16 \
+                 notch_width=0
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0xff222222
-
-##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
+##### Default Item Settings #####
 default=(
-  padding_left=5
-  padding_right=5
-  icon.font="Hack Nerd Font Mono:Bold:17.0"
-  label.font="Hack Nerd Font Mono:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
-  icon.padding_left=4
+  padding_left=0
+  padding_right=0
+  icon.font="Hack Nerd Font Mono:Bold:14.0"
+  label.font="Hack Nerd Font Mono:Medium:12.0"
+  icon.color=$TEXT_PRIMARY
+  label.color=$TEXT_PRIMARY
+  icon.padding_left=10
   icon.padding_right=4
   label.padding_left=4
-  label.padding_right=4
+  label.padding_right=10
+  background.color=$BG_PRIMARY
+  background.corner_radius=6
+  background.height=26
+  background.padding_left=0
+  background.padding_right=0
 )
 sketchybar --default "${default[@]}"
 
-####### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
+##### LEFT SIDE: WORKSPACES #####
 
 sketchybar --add event aerospace_workspace_change
 
-# aerospace list-workspaces --all
-# Define workspace labels - add more as needed
 declare -A workspace_labels
 workspace_labels[9]="prv"
 
@@ -55,114 +62,175 @@ workspaces=(1 2 3 4 5 6 7 8 9)
 
 for sid in ${workspaces[@]}; do
     if [ -n "${workspace_labels[$sid]}" ]; then
-        # Workspace has a custom label
         sketchybar --add item space.$sid left \
             --subscribe space.$sid aerospace_workspace_change \
             --set space.$sid \
-            background.color=0xffC34043 \
-            background.corner_radius=1 \
-            background.height=30 \
+            background.color=$BG_PRIMARY \
+            background.corner_radius=6 \
+            background.height=26 \
             background.drawing=off \
-            background.border_color=0xffeeffff \
-            background.border_width=0 \
             icon="$sid" \
-            icon.font="Hack Nerd Font Mono:Bold:14.0" \
-            icon.color=0xffffffff \
-            icon.padding_left=4 \
-            icon.padding_right=2 \
+            icon.font="Hack Nerd Font Mono:Bold:12.0" \
+            icon.color=$TEXT_PRIMARY \
+            icon.padding_left=10 \
+            icon.padding_right=3 \
             label="${workspace_labels[$sid]}" \
-            label.font="Hack Nerd Font Mono:Regular:10.0" \
-            label.color=0xff888888 \
-            geometry.width=50 \
-            label.align="center" \
+            label.font="Hack Nerd Font Mono:Medium:12.0" \
+            label.color=$TEXT_SECONDARY \
+            label.padding_right=10 \
+            padding_left=4 \
+            padding_right=4 \
             click_script="aerospace workspace $sid" \
             script="$CONFIG_DIR/plugins/aerospace.sh $sid"
     else
-        # Regular workspace with just number
         sketchybar --add item space.$sid left \
             --subscribe space.$sid aerospace_workspace_change \
             --set space.$sid \
-            background.color=0xffC34043 \
-            background.corner_radius=1 \
-            background.height=30 \
+            background.color=$BG_PRIMARY \
+            background.corner_radius=6 \
+            background.height=26 \
             background.drawing=off \
-            background.border_color=0xffeeffff \
-            background.border_width=0 \
             label="$sid" \
-            geometry.width=32 \
+            label.font="Hack Nerd Font Mono:Medium:12.0" \
+            label.color=$TEXT_PRIMARY \
             icon.drawing=off \
-            label.align="center" \
+            label.padding_left=10 \
+            label.padding_right=10 \
+            padding_left=4 \
+            padding_right=4 \
             click_script="aerospace workspace $sid" \
             script="$CONFIG_DIR/plugins/aerospace.sh $sid"
     fi
 done
 
-sketchybar --add item aerospace_mode left \
-           --set aerospace_mode icon.drawing=off label="Aerospace" drawing=off
+##### LEFT SIDE: FRONT APP #####
 
-sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
-           --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+sketchybar --add item separator_left left \
+           --set separator_left \
+                 icon=│ \
+                 icon.color=$BG_SECONDARY \
+                 icon.font="Hack Nerd Font Mono:Regular:14.0" \
+                 icon.padding_left=8 \
+                 icon.padding_right=8 \
+                 background.drawing=off \
+                 label.drawing=off
+
+sketchybar --add item front_app left \
+           --set front_app \
+                 icon= \
+                 icon.color=$ACCENT_BLUE \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
-sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh"
+##### RIGHT SIDE: SYSTEM STATUS #####
 
-sketchybar --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change
+sketchybar --add item clock right \
+           --set clock \
+                 update_freq=10 \
+                 icon= \
+                 icon.color=$ACCENT_BLUE \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/clock.sh"
 
 sketchybar --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --set battery background.color=0xffffeb3b \
-           --set battery background.height=30 \
-           --set battery background.corner_radius=1 \
-           --set battery label.color=0xff000000 \
-           --set battery icon.color=0xff000000 \
+           --set battery \
+                 update_freq=120 \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change
 
+sketchybar --add item volume right \
+           --set volume \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
 sketchybar --add item wifi right \
-           --set wifi update_freq=10 icon= script="$PLUGIN_DIR/wifi.sh" \
-           --set wifi background.color=0xff48c774 \
-           --set wifi background.height=30 \
-           --set wifi background.corner_radius=1 \
-           --set wifi label.color=0xff000000 \
-           --set wifi icon.color=0xff000000 \
-           --set wifi click_script="$PLUGIN_DIR/wifi_toggle.sh" \
-           --subscribe wifi system_woke
+           --set wifi \
+                 update_freq=10 \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 click_script="$PLUGIN_DIR/wifi_toggle.sh" \
+                 script="$PLUGIN_DIR/wifi.sh" \
+          --subscribe wifi system_woke
 
 sketchybar --add item inputlayout right \
            --add event inputlayout_change "AppleSelectedInputSourcesChangedNotification" \
            --subscribe inputlayout inputlayout_change \
-           --set inputlayout script="$PLUGIN_DIR/input_layout.sh" \
-           background.color=0xff42bcf5 \
-           background.height=30 \
-           background.corner_radius=1 \
-           geometry.width=32 \
-           icon.drawing=off \
-           label.color=0xff000000 \
-           icon.color=0xff000000
+           --set inputlayout \
+                 icon.drawing=off \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/input_layout.sh"
 
 sketchybar --add item lima right \
-           --set lima update_freq=120 script="$PLUGIN_DIR/lima.sh" \
-           --set lima background.color=0xff5d8aa8 \
-           --set lima background.height=30 \
-           --set lima background.corner_radius=1 \
-           --set lima label.color=0xff000000 \
-           --set lima icon.color=0xff000000 \
-           --set lima icon.color=0xff000000
+           --set lima \
+                 update_freq=120 \
+                 icon=󰋗 \
+                 icon.color=$ACCENT_YELLOW \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 script="$PLUGIN_DIR/lima.sh"
 
 sketchybar --add item orbstack right \
-           --set orbstack update_freq=10 script="$PLUGIN_DIR/orbstack.sh" \
-           --set orbstack background.color=0xffff5555 \
-           --set orbstack background.height=30 \
-           --set orbstack background.corner_radius=1 \
-           --set orbstack label.color=0xffffffff \
-           --set orbstack icon.color=0xffffffff \
-           --set orbstack label.font="Hack Nerd Font Mono:Bold:10.0" \
-           --set orbstack click_script="$PLUGIN_DIR/orbstack_toggle.sh" \
-           --subscribe orbstack system_woke
+           --set orbstack \
+                 update_freq=10 \
+                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
+                 label.font="Hack Nerd Font Mono:Medium:12.0" \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 click_script="$PLUGIN_DIR/orbstack_toggle.sh" \
+                 script="$PLUGIN_DIR/orbstack.sh" \
+          --subscribe orbstack system_woke
 
-##### Force all scripts to run the first time (never do this in a script) #####
+##### Initialize #####
 sketchybar --update
+
+echo "✓ SketchyBar configuration loaded"

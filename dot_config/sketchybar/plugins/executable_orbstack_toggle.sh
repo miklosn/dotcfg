@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# Pastel color palette
+PASTEL_YELLOW=0xfff9e2af
+TEXT_DARK=0xff1e1e2e
+
 if pgrep -x "OrbStack" > /dev/null; then
-    sketchybar --set orbstack icon="" label="Stopping..." \
-               background.color=0xffffa500 \
-               icon.color=0xff000000 \
-               label.color=0xff000000 \
-               label.font="Hack Nerd Font Mono:Bold:10.0" \
+    sketchybar --set orbstack label="Stopping..." \
+               label.font="Hack Nerd Font Mono:Medium:12.0" \
+               background.color=$PASTEL_YELLOW \
+               label.color=$TEXT_DARK \
+               label.padding_left=10 \
+               label.padding_right=10 \
                update_freq=0
     
     osascript -e 'quit app "OrbStack"'
@@ -13,21 +18,16 @@ if pgrep -x "OrbStack" > /dev/null; then
     for i in {1..10}; do
         sleep 0.5
         if ! pgrep -x "OrbStack" > /dev/null; then
-            sketchybar --set orbstack icon="" label="OrbStack: OFF" \
-                       background.color=0xffff5555 \
-                       icon.color=0xffffffff \
-                       label.color=0xffffffff \
-                       label.font="Hack Nerd Font Mono:Bold:10.0" \
-                       update_freq=10
             break
         fi
     done
 else
-    sketchybar --set orbstack icon="" label="Starting..." \
-               background.color=0xff87ceeb \
-               icon.color=0xff000000 \
-               label.color=0xff000000 \
-               label.font="Hack Nerd Font Mono:Bold:10.0" \
+    sketchybar --set orbstack label="Starting..." \
+               label.font="Hack Nerd Font Mono:Medium:12.0" \
+               background.color=$PASTEL_YELLOW \
+               label.color=$TEXT_DARK \
+               label.padding_left=10 \
+               label.padding_right=10 \
                update_freq=0
     
     open -a "OrbStack" -j
@@ -35,13 +35,11 @@ else
     for i in {1..10}; do
         sleep 0.5
         if pgrep -x "OrbStack" > /dev/null; then
-            sketchybar --set orbstack icon="" label="OrbStack: ON" \
-                       background.color=0xff48c774 \
-                       icon.color=0xff000000 \
-                       label.color=0xff000000 \
-                       label.font="Hack Nerd Font Mono:Bold:10.0" \
-                       update_freq=10
             break
         fi
     done
 fi
+
+# Force update to show current status with proper colors
+sketchybar --set orbstack update_freq=10
+$CONFIG_DIR/plugins/orbstack.sh

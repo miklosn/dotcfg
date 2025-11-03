@@ -1,7 +1,15 @@
 #!/bin/sh
 
-# The $NAME variable is passed from sketchybar and holds the name of
-# the item invoking this script:
-# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+# Clock plugin - Uniform design with consistent styling
 
-sketchybar --set "$NAME" label="$(date '+%m-%d %H:%M')"
+# Color palette (matching main config)
+TEXT=0xffcdd6f4
+
+# Format: MM-DD HH:MM
+LABEL="$(date '+%m-%d %H:%M')"
+
+sketchybar --set "$NAME" \
+  icon="" \
+  icon.color=0xff89b4fa \
+  label="$LABEL" \
+  label.color=$TEXT

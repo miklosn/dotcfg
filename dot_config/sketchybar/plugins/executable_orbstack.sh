@@ -1,21 +1,26 @@
 #!/bin/bash
 
+# OrbStack plugin - Text-based design with pastel background colors
+
+# Pastel color palette for background
+PASTEL_GREEN=0xffa6e3a1
+BG_PRIMARY=0xff313244
+TEXT_PRIMARY=0xffcdd6f4
+TEXT_DARK=0xff1e1e2e
+
 if pgrep -x "OrbStack" > /dev/null; then
-    LABEL="OrbStack: ON"
-    ICON=""
-    COLOR=0xff48c774
-    ICON_COLOR=0xff000000
-    LABEL_COLOR=0xff000000
+    BG_COLOR=$PASTEL_GREEN
+    LABEL_COLOR=$TEXT_DARK
 else
-    LABEL="OrbStack: OFF"
-    ICON=""
-    COLOR=0xffff5555
-    ICON_COLOR=0xffffffff
-    LABEL_COLOR=0xffffffff
+    BG_COLOR=$BG_PRIMARY
+    LABEL_COLOR=$TEXT_PRIMARY
 fi
 
-sketchybar --set $NAME icon="$ICON" label="$LABEL" \
-           background.color="$COLOR" \
-           icon.color="$ICON_COLOR" \
-           label.color="$LABEL_COLOR" \
-           label.font="Hack Nerd Font Mono:Bold:10.0"
+sketchybar --set $NAME \
+    icon.drawing=off \
+    label="Orb" \
+    label.font="Hack Nerd Font Mono:Medium:12.0" \
+    label.color=$LABEL_COLOR \
+    label.padding_left=10 \
+    label.padding_right=10 \
+    background.color=$BG_COLOR
