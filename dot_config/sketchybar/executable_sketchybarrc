@@ -5,6 +5,12 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
+##### Typography System #####
+export FONT_FACE="Hack Nerd Font Mono"
+export FONT_ICON="${FONT_FACE}:Bold:14.0"
+export FONT_LABEL="${FONT_FACE}:Bold:12.0"
+export FONT_SEPARATOR="${FONT_FACE}:Regular:14.0"
+
 ##### Color Palette (Catppuccin Mocha) #####
 BAR_COLOR=0xe01e1e2e
 BG_PRIMARY=0xff313244
@@ -35,8 +41,8 @@ sketchybar --bar position=top \
 default=(
   padding_left=0
   padding_right=0
-  icon.font="Hack Nerd Font Mono:Bold:14.0"
-  label.font="Hack Nerd Font Mono:Medium:12.0"
+  icon.font="$FONT_ICON"
+  label.font="$FONT_LABEL"
   icon.color=$TEXT_PRIMARY
   label.color=$TEXT_PRIMARY
   icon.padding_left=10
@@ -70,12 +76,12 @@ for sid in ${workspaces[@]}; do
             background.height=26 \
             background.drawing=off \
             icon="$sid" \
-            icon.font="Hack Nerd Font Mono:Bold:12.0" \
+            icon.font="$FONT_ICON" \
             icon.color=$TEXT_PRIMARY \
             icon.padding_left=10 \
             icon.padding_right=3 \
             label="${workspace_labels[$sid]}" \
-            label.font="Hack Nerd Font Mono:Medium:12.0" \
+            label.font="$FONT_LABEL" \
             label.color=$TEXT_SECONDARY \
             label.padding_right=10 \
             padding_left=4 \
@@ -91,7 +97,7 @@ for sid in ${workspaces[@]}; do
             background.height=26 \
             background.drawing=off \
             label="$sid" \
-            label.font="Hack Nerd Font Mono:Medium:12.0" \
+            label.font="$FONT_LABEL" \
             label.color=$TEXT_PRIMARY \
             icon.drawing=off \
             label.padding_left=10 \
@@ -109,7 +115,7 @@ sketchybar --add item separator_left left \
            --set separator_left \
                  icon=│ \
                  icon.color=$BG_SECONDARY \
-                 icon.font="Hack Nerd Font Mono:Regular:14.0" \
+                 icon.font="$FONT_SEPARATOR" \
                  icon.padding_left=8 \
                  icon.padding_right=8 \
                  background.drawing=off \
@@ -119,8 +125,6 @@ sketchybar --add item front_app left \
            --set front_app \
                  icon= \
                  icon.color=$ACCENT_BLUE \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -137,8 +141,6 @@ sketchybar --add item clock right \
                  update_freq=10 \
                  icon= \
                  icon.color=$ACCENT_BLUE \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -150,8 +152,6 @@ sketchybar --add item clock right \
 sketchybar --add item battery right \
            --set battery \
                  update_freq=120 \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
                  background.height=26 \
@@ -162,8 +162,6 @@ sketchybar --add item battery right \
 
 sketchybar --add item volume right \
            --set volume \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -176,8 +174,6 @@ sketchybar --add item volume right \
 sketchybar --add item wifi right \
            --set wifi \
                  update_freq=10 \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
                  background.height=26 \
@@ -192,7 +188,6 @@ sketchybar --add item inputlayout right \
            --subscribe inputlayout inputlayout_change \
            --set inputlayout \
                  icon.drawing=off \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -206,8 +201,6 @@ sketchybar --add item lima right \
                  update_freq=120 \
                  icon=󰋗 \
                  icon.color=$ACCENT_YELLOW \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -219,8 +212,6 @@ sketchybar --add item lima right \
 sketchybar --add item orbstack right \
            --set orbstack \
                  update_freq=10 \
-                 icon.font="Hack Nerd Font Mono:Bold:14.0" \
-                 label.font="Hack Nerd Font Mono:Medium:12.0" \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
                  background.height=26 \

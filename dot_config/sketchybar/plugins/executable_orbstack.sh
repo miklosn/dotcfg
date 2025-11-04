@@ -19,7 +19,6 @@ fi
 sketchybar --set $NAME \
     icon.drawing=off \
     label="Orb" \
-    label.font="Hack Nerd Font Mono:Medium:12.0" \
     label.color=$LABEL_COLOR \
     label.padding_left=10 \
     label.padding_right=10 \

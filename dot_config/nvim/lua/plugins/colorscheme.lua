@@ -122,7 +122,7 @@ return {
     --   config = bar
     --   end,
   },
-  { "echasnovski/mini.base16", version = false },
+  { "nvim-mini/mini.base16", version = false },
   {
     "tiagovla/tokyodark.nvim",
     opts = {
@@ -191,7 +191,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-night", -- Change this to any of the added colorschemes
+      colorscheme = "sorbet", -- Change this to any of the added colorschemes
     },
   },
 }

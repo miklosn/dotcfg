@@ -6,7 +6,6 @@ TEXT_DARK=0xff1e1e2e
 
 if pgrep -x "OrbStack" > /dev/null; then
     sketchybar --set orbstack label="Stopping..." \
-               label.font="Hack Nerd Font Mono:Medium:12.0" \
                background.color=$PASTEL_YELLOW \
                label.color=$TEXT_DARK \
                label.padding_left=10 \
@@ -23,7 +22,6 @@ if pgrep -x "OrbStack" > /dev/null; then
     done
 else
     sketchybar --set orbstack label="Starting..." \
-               label.font="Hack Nerd Font Mono:Medium:12.0" \
                background.color=$PASTEL_YELLOW \
                label.color=$TEXT_DARK \
                label.padding_left=10 \

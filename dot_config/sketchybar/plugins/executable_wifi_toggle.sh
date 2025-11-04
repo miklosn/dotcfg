@@ -6,7 +6,6 @@ TEXT_DARK=0xff1e1e2e
 
 # Show toggling state
 sketchybar --set wifi label="Toggling..." \
-           label.font="Hack Nerd Font Mono:Medium:12.0" \
            background.color=$PASTEL_YELLOW \
            label.color=$TEXT_DARK \
            label.padding_left=10 \
@@ -23,7 +22,6 @@ networksetup -setairportpower en0 on
 
 # Show reconnecting state
 sketchybar --set wifi label="Connecting..." \
-           label.font="Hack Nerd Font Mono:Medium:12.0" \
            background.color=$PASTEL_YELLOW \
            label.color=$TEXT_DARK \
            label.padding_left=10 \
