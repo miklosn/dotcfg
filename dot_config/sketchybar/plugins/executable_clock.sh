@@ -1,15 +1,19 @@
-#!/bin/sh
+#!/opt/homebrew/bin/bash
 
-# Clock plugin - Uniform design with consistent styling
 
-# Color palette (matching main config)
-TEXT=0xffcdd6f4
+source "$CONFIG_DIR/plugins/common.sh"
+
+
+# Validate required environment
+validate_env "CONFIG_DIR"
 
 # Format: MM-DD HH:MM
-LABEL="$(date '+%m-%d %H:%M')"
+LABEL="$(date '+%m-%d %H:%M' 2>/dev/null)" || handle_error "Date command failed"
 
+# Set item style and content
+set_item_style
 sketchybar --set "$NAME" \
-  icon="" \
-  icon.color=0xff89b4fa \
-  label="$LABEL" \
-  label.color=$TEXT
+    icon="" \
+    icon.color=$COLOR_INFO \
+    label="$LABEL" \
+    label.color=$TEXT_PRIMARY

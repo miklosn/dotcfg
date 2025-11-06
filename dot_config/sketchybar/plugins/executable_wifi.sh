@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/opt/homebrew/bin/bash
+
+
+source "$CONFIG_DIR/plugins/common.sh"
 
 # WiFi plugin - Text-based design with SSID and pastel background colors
 
@@ -16,47 +19,50 @@ if [ -z "$CURRENT_NETWORK" ] || [ "$CURRENT_NETWORK" = "<redacted>" ]; then
   CURRENT_NETWORK=$(networksetup -getairportnetwork en0 2>/dev/null | sed 's/Current Wi-Fi Network: //' | grep -v "You are not associated")
 fi
 
-# Pastel color palette for background
-PASTEL_GREEN=0xffa6e3a1
-PASTEL_YELLOW=0xfff9e2af
-PASTEL_GRAY=0xffa6adc8
-TEXT_DARK=0xff1e1e2e
-
 # Set label and background color based on connection status
 if [ "$CURRENT_NETWORK" = "<redacted>" ] || [[ "$CURRENT_NETWORK" == *"redacted"* ]]; then
   # If we get redacted, just show "Connected" status
   WIFI_STATUS=$(networksetup -getairportpower en0 2>/dev/null | grep "On")
   if [ -n "$WIFI_STATUS" ]; then
-    LABEL="Connected"
-    BG_COLOR=$PASTEL_GREEN
+    # Test actual connectivity
+    if ping -c 1 -W 2000 8.8.8.8 >/dev/null 2>&1; then
+      set_label_only "Connected" $TEXT_DARK $COLOR_SUCCESS
+    else
+      set_label_only "No Internet" $TEXT_DARK $COLOR_ERROR
+    fi
   else
-    LABEL="WiFi Off"
-    BG_COLOR=$PASTEL_GRAY
+    set_label_only "WiFi Off" $TEXT_DARK $TEXT_SECONDARY
   fi
 elif [ -z "$CURRENT_NETWORK" ]; then
   # Check if WiFi is off or just no network
   WIFI_STATUS=$(networksetup -getairportpower en0 2>/dev/null | grep "On")
   if [ -z "$WIFI_STATUS" ]; then
-    LABEL="WiFi Off"
-    BG_COLOR=$PASTEL_GRAY
+    set_label_only "WiFi Off" $TEXT_DARK $TEXT_SECONDARY
   else
-    LABEL="Searching"
-    BG_COLOR=$PASTEL_YELLOW
+    # Test connectivity even when no SSID
+    if ping -c 1 -W 2000 8.8.8.8 >/dev/null 2>&1; then
+      set_label_only "Connected" $TEXT_DARK $COLOR_SUCCESS
+    else
+      set_label_only "Searching" $TEXT_DARK $COLOR_WARNING
+    fi
   fi
 else
-  # Connected to a network - show SSID (truncate if too long)
-  if [ ${#CURRENT_NETWORK} -gt 12 ]; then
-    LABEL="${CURRENT_NETWORK:0:10}.."
+  # Connected to a network - test actual connectivity
+  if ping -c 1 -W 2000 8.8.8.8 >/dev/null 2>&1; then
+    # Connected with internet - show SSID (truncate if too long)
+    if [ ${#CURRENT_NETWORK} -gt 12 ]; then
+      LABEL="${CURRENT_NETWORK:0:10}.."
+    else
+      LABEL="$CURRENT_NETWORK"
+    fi
+    set_label_only "$LABEL" $TEXT_DARK $PASTEL_GREEN
   else
-    LABEL="$CURRENT_NETWORK"
+    # Connected to network but no internet
+    if [ ${#CURRENT_NETWORK} -gt 12 ]; then
+      LABEL="${CURRENT_NETWORK:0:10}.."
+    else
+      LABEL="$CURRENT_NETWORK"
+    fi
+    set_label_only "$LABEL" $TEXT_DARK $COLOR_WARNING
   fi
-  BG_COLOR=$PASTEL_GREEN
 fi
-
-sketchybar --set "$NAME" \
-  icon.drawing=off \
-  label="$LABEL" \
-  label.color=$TEXT_DARK \
-  label.padding_left=10 \
-  label.padding_right=10 \
-  background.color=$BG_COLOR

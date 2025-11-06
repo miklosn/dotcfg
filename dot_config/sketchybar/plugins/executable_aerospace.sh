@@ -1,41 +1,61 @@
-#!/usr/bin/env bash
+#!/opt/homebrew/bin/bash
 
-# Aerospace workspace plugin - Uniform design with consistent styling
+
+source "$CONFIG_DIR/plugins/common.sh"
+
 
 WORKSPACE_NUMBER="$1"
 
-# Color palette (matching main config)
-FOCUSED_ICON=0xffcdd6f4      # Bright white for focused workspace
-FOCUSED_LABEL=0xff89b4fa     # Blue accent for focused label
-ACTIVE_ICON=0xffa6adc8       # Dimmer for active workspace with windows
-ACTIVE_LABEL=0xffa6adc8      # Dimmer for active label
-INACTIVE_ICON=0xff6c7086     # Dark gray for empty workspace
-INACTIVE_LABEL=0xff6c7086    # Dark gray for empty label
-BG_COLOR=0xff313244          # Background for focused
+# Cleanup any existing background processes for this workspace
+cleanup_workspace() {
+    pkill -f "aerospace.*workspace.*$WORKSPACE_NUMBER" 2>/dev/null || true
+}
+
+trap cleanup_workspace EXIT
+
+# Get current focused workspace - use env var if available, otherwise query aerospace
+if [ -z "$FOCUSED_WORKSPACE" ]; then
+    FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused 2>/dev/null)
+fi
 
 if [ "$WORKSPACE_NUMBER" = "$FOCUSED_WORKSPACE" ]; then
-  # Focused workspace: show with background and bright colors
+  # Focused workspace: use accent color background for maximum visibility
   sketchybar --set "$NAME" \
     background.drawing=on \
-    background.color=$BG_COLOR \
-    icon.color=$FOCUSED_ICON \
-    label.color=$FOCUSED_LABEL
+    background.color="$ACCENT_PRIMARY" \
+    icon.drawing=off \
+    label.color="$TEXT_DARK" \
+    label.padding_left="$TOGGLE_LABEL_PADDING_LEFT" \
+    label.padding_right="$TOGGLE_LABEL_PADDING_RIGHT"
 else
-  # Not focused - check for windows in background to avoid blocking
+  # Not focused - check for windows with timeout
   (
-    WINDOW_COUNT=$(aerospace list-windows --workspace "$WORKSPACE_NUMBER" 2>/dev/null | wc -l | tr -d ' ')
-    if [ "$WINDOW_COUNT" -gt 0 ]; then
-      # Workspace has windows: show as active (no background)
+    WINDOW_COUNT=$(timeout 2s aerospace list-windows --workspace "$WORKSPACE_NUMBER" 2>/dev/null | wc -l | tr -d ' ')
+
+    if [ $? -eq 124 ] || [ -z "$WINDOW_COUNT" ]; then
+      # Timeout/error: show as inactive
       sketchybar --set "$NAME" \
         background.drawing=off \
-        icon.color=$ACTIVE_ICON \
-        label.color=$ACTIVE_LABEL
+        icon.drawing=off \
+        label.color="$TEXT_INACTIVE" \
+        label.padding_left=10 \
+        label.padding_right="$LABEL_PADDING_RIGHT"
+    elif [ "$WINDOW_COUNT" -gt 0 ]; then
+      # Has windows: show with secondary accent for visibility
+      sketchybar --set "$NAME" \
+        background.drawing=off \
+        icon.drawing=off \
+        label.color="$TEXT_SECONDARY" \
+        label.padding_left=10 \
+        label.padding_right="$LABEL_PADDING_RIGHT"
     else
-      # Workspace has no windows: show as inactive
+      # Empty workspace: very dim
       sketchybar --set "$NAME" \
         background.drawing=off \
-        icon.color=$INACTIVE_ICON \
-        label.color=$INACTIVE_LABEL
+        icon.drawing=off \
+        label.color="$TEXT_INACTIVE" \
+        label.padding_left=10 \
+        label.padding_right="$LABEL_PADDING_RIGHT"
     fi
   ) &
 fi

@@ -1,19 +1,17 @@
-#!/bin/bash
+#!/opt/homebrew/bin/bash
 
-# Pastel color palette
-PASTEL_YELLOW=0xfff9e2af
-TEXT_DARK=0xff1e1e2e
+# Source common styling
+source "$CONFIG_DIR/plugins/common.sh"
 
 if pgrep -x "OrbStack" > /dev/null; then
+    set_item_colored_bg "$COLOR_WARNING"
     sketchybar --set orbstack label="Stopping..." \
-               background.color=$PASTEL_YELLOW \
-               label.color=$TEXT_DARK \
-               label.padding_left=10 \
-               label.padding_right=10 \
+               label.padding_left="$TOGGLE_LABEL_PADDING_LEFT" \
+               label.padding_right="$TOGGLE_LABEL_PADDING_RIGHT" \
                update_freq=0
-    
+
     osascript -e 'quit app "OrbStack"'
-    
+
     for i in {1..10}; do
         sleep 0.5
         if ! pgrep -x "OrbStack" > /dev/null; then
@@ -21,15 +19,14 @@ if pgrep -x "OrbStack" > /dev/null; then
         fi
     done
 else
+    set_item_colored_bg "$COLOR_WARNING"
     sketchybar --set orbstack label="Starting..." \
-               background.color=$PASTEL_YELLOW \
-               label.color=$TEXT_DARK \
-               label.padding_left=10 \
-               label.padding_right=10 \
+               label.padding_left="$TOGGLE_LABEL_PADDING_LEFT" \
+               label.padding_right="$TOGGLE_LABEL_PADDING_RIGHT" \
                update_freq=0
-    
+
     open -a "OrbStack" -j
-    
+
     for i in {1..10}; do
         sleep 0.5
         if pgrep -x "OrbStack" > /dev/null; then
@@ -40,4 +37,4 @@ fi
 
 # Force update to show current status with proper colors
 sketchybar --set orbstack update_freq=10
-$CONFIG_DIR/plugins/orbstack.sh
+"$CONFIG_DIR"/plugins/orbstack.sh

@@ -1,43 +1,23 @@
-#!/bin/bash
+#!/opt/homebrew/bin/bash
 
-# SketchyBar Configuration - Uniform Design System
-# All items follow the same visual language with consistent spacing, colors, and typography
-
+source "$CONFIG_DIR/themes.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-##### Typography System #####
-export FONT_FACE="Hack Nerd Font Mono"
-export FONT_ICON="${FONT_FACE}:Bold:14.0"
-export FONT_LABEL="${FONT_FACE}:Bold:12.0"
-export FONT_SEPARATOR="${FONT_FACE}:Regular:14.0"
-
-##### Color Palette (Catppuccin Mocha) #####
-BAR_COLOR=0xe01e1e2e
-BG_PRIMARY=0xff313244
-BG_SECONDARY=0xff45475a
-TEXT_PRIMARY=0xffcdd6f4
-TEXT_SECONDARY=0xffa6adc8
-ACCENT_BLUE=0xff89b4fa
-ACCENT_GREEN=0xffa6e3a1
-ACCENT_YELLOW=0xfff9e2af
-ACCENT_RED=0xfff38ba8
-ACCENT_MAUVE=0xffcba6f7
-
-##### Bar Appearance #####
+# Bar Appearance
 sketchybar --bar position=top \
                  height=38 \
                  margin=0 \
                  y_offset=0 \
                  corner_radius=0 \
-                 blur_radius=30 \
+                 blur_radius="$BLUR_RADIUS" \
                  color=$BAR_COLOR \
-                 shadow=off \
+                 shadow="$SHADOW_ENABLED" \
                  sticky=on \
                  padding_left=16 \
                  padding_right=16 \
                  notch_width=0
 
-##### Default Item Settings #####
+# Default Item Settings
 default=(
   padding_left=0
   padding_right=0
@@ -45,19 +25,19 @@ default=(
   label.font="$FONT_LABEL"
   icon.color=$TEXT_PRIMARY
   label.color=$TEXT_PRIMARY
-  icon.padding_left=10
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=10
+  icon.padding_left="$ICON_PADDING_LEFT"
+  icon.padding_right="$ICON_PADDING_RIGHT"
+  label.padding_left="$LABEL_PADDING_LEFT"
+  label.padding_right="$LABEL_PADDING_RIGHT"
   background.color=$BG_PRIMARY
-  background.corner_radius=6
-  background.height=26
+  background.corner_radius="$CORNER_RADIUS"
+  background.height="$ITEM_HEIGHT"
   background.padding_left=0
   background.padding_right=0
 )
 sketchybar --default "${default[@]}"
 
-##### LEFT SIDE: WORKSPACES #####
+# Workspaces
 
 sketchybar --add event aerospace_workspace_change
 
@@ -66,50 +46,33 @@ workspace_labels[9]="prv"
 
 workspaces=(1 2 3 4 5 6 7 8 9)
 
-for sid in ${workspaces[@]}; do
-    if [ -n "${workspace_labels[$sid]}" ]; then
-        sketchybar --add item space.$sid left \
-            --subscribe space.$sid aerospace_workspace_change \
-            --set space.$sid \
-            background.color=$BG_PRIMARY \
-            background.corner_radius=6 \
-            background.height=26 \
-            background.drawing=off \
-            icon="$sid" \
-            icon.font="$FONT_ICON" \
-            icon.color=$TEXT_PRIMARY \
-            icon.padding_left=10 \
-            icon.padding_right=3 \
-            label="${workspace_labels[$sid]}" \
-            label.font="$FONT_LABEL" \
-            label.color=$TEXT_SECONDARY \
-            label.padding_right=10 \
-            padding_left=4 \
-            padding_right=4 \
-            click_script="aerospace workspace $sid" \
-            script="$CONFIG_DIR/plugins/aerospace.sh $sid"
-    else
-        sketchybar --add item space.$sid left \
-            --subscribe space.$sid aerospace_workspace_change \
-            --set space.$sid \
-            background.color=$BG_PRIMARY \
-            background.corner_radius=6 \
-            background.height=26 \
-            background.drawing=off \
-            label="$sid" \
-            label.font="$FONT_LABEL" \
-            label.color=$TEXT_PRIMARY \
-            icon.drawing=off \
-            label.padding_left=10 \
-            label.padding_right=10 \
-            padding_left=4 \
-            padding_right=4 \
-            click_script="aerospace workspace $sid" \
-            script="$CONFIG_DIR/plugins/aerospace.sh $sid"
-    fi
+for sid in "${workspaces[@]}"; do
+    LABEL="$sid"
+    [ -n "${workspace_labels[$sid]}" ] && LABEL="$sid ${workspace_labels[$sid]}"
+
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=$BG_PRIMARY \
+        background.corner_radius="$CORNER_RADIUS" \
+        background.height="$ITEM_HEIGHT" \
+        background.drawing=off \
+        icon.drawing=off \
+        label="$LABEL" \
+        label.font="$FONT_LABEL" \
+        label.color=$TEXT_PRIMARY \
+        label.padding_left=10 \
+        label.padding_right="$LABEL_PADDING_RIGHT" \
+        padding_left=4 \
+        padding_right=4 \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
-##### LEFT SIDE: FRONT APP #####
+# Trigger initial update for all workspaces
+sketchybar --trigger aerospace_workspace_change
+
+# Front App
 
 sketchybar --add item separator_left left \
            --set separator_left \
@@ -124,30 +87,45 @@ sketchybar --add item separator_left left \
 sketchybar --add item front_app left \
            --set front_app \
                  icon= \
-                 icon.color=$ACCENT_BLUE \
+                 icon.color=$ACCENT_PRIMARY \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
                  background.height=26 \
                  padding_left=4 \
                  padding_right=4 \
-                 script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+                  script="$PLUGIN_DIR/front_app.sh" \
+            --subscribe front_app front_app_switched
 
-##### RIGHT SIDE: SYSTEM STATUS #####
+# Theme Switcher
+
+sketchybar --add item theme_switcher left \
+           --set theme_switcher \
+                 update_freq=0 \
+                 icon.color=$ACCENT_PRIMARY \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 click_script="$PLUGIN_DIR/theme_switcher_toggle.sh" \
+                 script="$PLUGIN_DIR/theme_switcher.sh"
+
+# System Status Items
 
 sketchybar --add item clock right \
            --set clock \
                  update_freq=10 \
                  icon= \
-                 icon.color=$ACCENT_BLUE \
+                 icon.color=$ACCENT_PRIMARY \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
                  background.height=26 \
                  padding_left=4 \
                  padding_right=4 \
-                 script="$PLUGIN_DIR/clock.sh"
+                  script="$PLUGIN_DIR/clock.sh"
 
 sketchybar --add item battery right \
            --set battery \
@@ -157,8 +135,8 @@ sketchybar --add item battery right \
                  background.height=26 \
                  padding_left=4 \
                  padding_right=4 \
-                 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+                  script="$PLUGIN_DIR/battery.sh" \
+            --subscribe battery system_woke power_source_change
 
 sketchybar --add item volume right \
            --set volume \
@@ -168,8 +146,23 @@ sketchybar --add item volume right \
                  background.height=26 \
                  padding_left=4 \
                  padding_right=4 \
-                 script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change
+                  script="$PLUGIN_DIR/volume.sh" \
+            --subscribe volume volume_change
+
+sketchybar --add event microphone_change \
+           --add item microphone right \
+           --set microphone \
+                 update_freq=5 \
+                 icon.color=$TEXT_PRIMARY \
+                 label.color=$TEXT_PRIMARY \
+                 background.color=$BG_PRIMARY \
+                 background.corner_radius=6 \
+                 background.height=26 \
+                 padding_left=4 \
+                 padding_right=4 \
+                 click_script="$PLUGIN_DIR/microphone_toggle.sh" \
+                  script="$PLUGIN_DIR/microphone.sh" \
+            --subscribe microphone microphone_change
 
 sketchybar --add item wifi right \
            --set wifi \
@@ -180,12 +173,12 @@ sketchybar --add item wifi right \
                  padding_left=4 \
                  padding_right=4 \
                  click_script="$PLUGIN_DIR/wifi_toggle.sh" \
-                 script="$PLUGIN_DIR/wifi.sh" \
-          --subscribe wifi system_woke
+                  script="$PLUGIN_DIR/wifi.sh" \
+           --subscribe wifi system_woke
 
 sketchybar --add item inputlayout right \
            --add event inputlayout_change "AppleSelectedInputSourcesChangedNotification" \
-           --subscribe inputlayout inputlayout_change \
+                       --subscribe inputlayout inputlayout_change \
            --set inputlayout \
                  icon.drawing=off \
                  label.color=$TEXT_PRIMARY \
@@ -194,13 +187,12 @@ sketchybar --add item inputlayout right \
                  background.height=26 \
                  padding_left=4 \
                  padding_right=4 \
-                 script="$PLUGIN_DIR/input_layout.sh"
+                  script="$PLUGIN_DIR/input_layout.sh"
 
 sketchybar --add item lima right \
            --set lima \
                  update_freq=120 \
-                 icon=󰋗 \
-                 icon.color=$ACCENT_YELLOW \
+                 icon.drawing=off \
                  label.color=$TEXT_PRIMARY \
                  background.color=$BG_PRIMARY \
                  background.corner_radius=6 \
@@ -219,9 +211,7 @@ sketchybar --add item orbstack right \
                  padding_right=4 \
                  click_script="$PLUGIN_DIR/orbstack_toggle.sh" \
                  script="$PLUGIN_DIR/orbstack.sh" \
-          --subscribe orbstack system_woke
-
-##### Initialize #####
+           --subscribe orbstack system_woke
 sketchybar --update
 
 echo "✓ SketchyBar configuration loaded"

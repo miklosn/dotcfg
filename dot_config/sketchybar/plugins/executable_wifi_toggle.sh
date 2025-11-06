@@ -1,15 +1,13 @@
-#!/bin/sh
+#!/opt/homebrew/bin/bash
 
-# Pastel color palette
-PASTEL_YELLOW=0xfff9e2af
-TEXT_DARK=0xff1e1e2e
+# Source common styling
+source "$CONFIG_DIR/plugins/common.sh"
 
 # Show toggling state
+set_item_colored_bg "$COLOR_WARNING"
 sketchybar --set wifi label="Toggling..." \
-           background.color=$PASTEL_YELLOW \
-           label.color=$TEXT_DARK \
-           label.padding_left=10 \
-           label.padding_right=10
+           label.padding_left="$TOGGLE_LABEL_PADDING_LEFT" \
+           label.padding_right="$TOGGLE_LABEL_PADDING_RIGHT"
 
 # Turn off WiFi
 networksetup -setairportpower en0 off
@@ -21,14 +19,13 @@ sleep 1
 networksetup -setairportpower en0 on
 
 # Show reconnecting state
+set_item_colored_bg "$COLOR_WARNING"
 sketchybar --set wifi label="Connecting..." \
-           background.color=$PASTEL_YELLOW \
-           label.color=$TEXT_DARK \
-           label.padding_left=10 \
-           label.padding_right=10
+           label.padding_left="$TOGGLE_LABEL_PADDING_LEFT" \
+           label.padding_right="$TOGGLE_LABEL_PADDING_RIGHT"
 
 # Wait a bit for connection
 sleep 2
 
 # Force update of the WiFi status
-$CONFIG_DIR/plugins/wifi.sh
+"$CONFIG_DIR"/plugins/wifi.sh
