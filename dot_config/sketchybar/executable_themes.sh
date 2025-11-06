@@ -334,13 +334,8 @@ export TOGGLE_LABEL_PADDING_RIGHT=10
 
 export PASTEL_GREEN=0xff9ec49f
 
-# Typography - read from .font file or use default
-FONT_FILE="$CONFIG_DIR/.font"
-if [[ -f "$FONT_FILE" ]]; then
-    FONT_FACE="$(cat "$FONT_FILE")"
-else
-    FONT_FACE="${SKETCHYBAR_FONT:-Hack Nerd Font Mono}"
-fi
+# Typography
+FONT_FACE="${SKETCHYBAR_FONT:-Hack Nerd Font Mono}"
 
 export FONT_FACE
 export FONT_ICON="${FONT_FACE}:Bold:14.0"

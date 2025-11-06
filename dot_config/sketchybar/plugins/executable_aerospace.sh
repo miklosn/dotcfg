@@ -41,11 +41,12 @@ else
         label.padding_left=10 \
         label.padding_right="$LABEL_PADDING_RIGHT"
     elif [ "$WINDOW_COUNT" -gt 0 ]; then
-      # Has windows: show with secondary accent for visibility
+      # Has windows: show with background and brighter color for emphasis
       sketchybar --set "$NAME" \
-        background.drawing=off \
+        background.drawing=on \
+        background.color="$BG_SECONDARY" \
         icon.drawing=off \
-        label.color="$TEXT_SECONDARY" \
+        label.color="$TEXT_PRIMARY" \
         label.padding_left=10 \
         label.padding_right="$LABEL_PADDING_RIGHT"
     else
