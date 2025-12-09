@@ -43,7 +43,7 @@
 [diff "sopsdiffer"]
 	textconv = sops -d
 [core]
-	excludesfile = /Users/mico/.gitignore
+	excludesfile = ~/.gitignore
 
 [help]
         autocorrect = prompt

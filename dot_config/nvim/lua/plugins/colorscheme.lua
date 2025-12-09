@@ -191,7 +191,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "sorbet", -- Change this to any of the added colorschemes
+      colorscheme = "bamboo", -- Change this to any of the added colorschemes
     },
   },
 }

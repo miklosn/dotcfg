@@ -1,5 +1,3 @@
-
-# Devenv
 .devenv*
 devenv.local.nix
 .direnv/
@@ -7,3 +5,7 @@ devenv.local.nix
 .pre-commit*
 .cfg/
 .aider*
+.claude/
+.op/
+AGENTS.md
+CLAUDE.md
