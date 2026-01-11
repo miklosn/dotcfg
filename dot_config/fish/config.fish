@@ -1,3 +1,4 @@
+/opt/homebrew/bin/brew shellenv | source
 # ============================================================================
 # Environment Variables (Always Active)
 # ============================================================================
@@ -5,7 +6,7 @@
 set -gx EDITOR nvim
 set -gx NIXPKGS_ALLOW_UNFREE 1
 set -gx CLOUDSDK_PYTHON_SITEPACKAGES 1
-set -gx ZK_NOTEBOOK_DIR "/Users/mico/c/zk/"
+set -gx ZK_NOTEBOOK_DIR /Users/mico/c/zk/
 
 # PATH additions using fish_add_path (deduplicated)
 fish_add_path /opt/homebrew/bin
@@ -47,9 +48,7 @@ if status is-interactive
     end
 
     # Smart cd: zoxide
-    if type -q zoxide
-        zoxide init fish | source
-    end
+    zoxide init fish | source
 
     # Vi mode
     fish_vi_key_bindings
@@ -61,9 +60,9 @@ if status is-interactive
     # Aliases
     # ========================================================================
 
-    alias k 'kubectl'
-    alias g 'git'
-    alias tf 'terraform'
+    alias k kubectl
+    alias g git
+    alias tf terraform
     alias mtrr 'sudo mtr -T -P 443 -e -z'
     alias config '/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 end
