@@ -1,0 +1,54 @@
+-- Define the more colorful Adidas-inspired palette
+local colors = {
+  black = "#000000",
+  white = "#FFFFFF",
+  blue = "#0087C1",
+  red = "#D32D2D",
+  green = "#2E7D32",
+  yellow = "#FFEB3B",
+  gray = "#757575",
+  light_gray = "#B3B3B3",
+}
+
+-- Apply the color scheme
+vim.cmd("highlight clear")
+if vim.g.syntax_on then
+  vim.cmd("syntax reset")
+end
+
+vim.g.colors_name = "adidas_colorful"
+
+-- Editor colors
+vim.cmd("highlight Normal guifg=" .. colors.white .. " guibg=" .. colors.black)
+vim.cmd("highlight LineNr guifg=" .. colors.gray .. " guibg=" .. colors.black)
+vim.cmd("highlight CursorLineNr guifg=" .. colors.yellow .. " guibg=" .. colors.black)
+vim.cmd("highlight CursorLine guibg=" .. colors.blue .. " guifg=" .. colors.black)
+vim.cmd("highlight Visual guibg=" .. colors.blue)
+vim.cmd("highlight StatusLine guifg=" .. colors.white .. " guibg=" .. colors.black)
+vim.cmd("highlight StatusLineNC guifg=" .. colors.light_gray .. " guibg=" .. colors.black)
+vim.cmd("highlight VertSplit guifg=" .. colors.gray .. " guibg=" .. colors.black)
+vim.cmd("highlight Pmenu guibg=" .. colors.gray)
+vim.cmd("highlight PmenuSel guibg=" .. colors.green)
+vim.cmd("highlight PmenuSbar guibg=" .. colors.light_gray)
+vim.cmd("highlight PmenuThumb guibg=" .. colors.gray)
+vim.cmd("highlight TabLine guifg=" .. colors.red .. " guibg=" .. colors.black)
+vim.cmd("highlight TabLineFill guibg=" .. colors.gray)
+vim.cmd("highlight TabLineSel guifg=" .. colors.white .. " guibg=" .. colors.green)
+
+-- Syntax highlighting
+vim.cmd("highlight Comment guifg=" .. colors.gray)
+vim.cmd("highlight Constant guifg=" .. colors.red)
+vim.cmd("highlight String guifg=" .. colors.green)
+vim.cmd("highlight Identifier guifg=" .. colors.blue)
+vim.cmd("highlight Function guifg=" .. colors.yellow)
+vim.cmd("highlight Statement guifg=" .. colors.red)
+vim.cmd("highlight Keyword guifg=" .. colors.blue)
+vim.cmd("highlight Type guifg=" .. colors.green)
+vim.cmd("highlight Special guifg=" .. colors.yellow)
+vim.cmd("highlight Underlined guifg=" .. colors.red .. " gui=underline")
+
+-- Diagnostics
+vim.cmd("highlight DiagnosticError guifg=" .. colors.red)
+vim.cmd("highlight DiagnosticWarn guifg=" .. colors.yellow)
+vim.cmd("highlight DiagnosticInfo guifg=" .. colors.blue)
+vim.cmd("highlight DiagnosticHint guifg=" .. colors.green)

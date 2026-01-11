@@ -1,0 +1,50 @@
+# Minimal Starship Config
+
+# Ultra-minimal: dir + git + prompt
+format = "$directory$git_branch$git_status$character "
+
+[directory]
+style = "bold blue"
+truncate_to_repo = false
+
+[character]
+success_symbol = ">"
+error_symbol = ">"
+
+[git_branch]
+style = "bold yellow"
+
+[git_status]
+style = "bold red"
+disabled = false
+
+# Disabled expensive/slow modules
+[kubernetes]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[python]
+disabled = true
+
+[golang]
+disabled = true
+
+[rust]
+disabled = true
+
+[java]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true

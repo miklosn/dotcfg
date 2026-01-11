@@ -1,0 +1,85 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-pty"
+  ],
+  "instructions": ["AGENTS.md"],
+  "keybinds": {
+    "session_child_cycle": "ctrl+right",
+    "session_child_cycle_reverse": "ctrl+left",
+  },
+  "model": "openrouter/z-ai/glm-4.7",
+  "provider": {
+    "openrouter": {
+      "models": {
+        "qwen/qwen3-coder": {
+          "options": {
+            "provider": {
+              "order": [
+                "cerebras/fp8"
+              ],
+              "sort": "throughput",
+              "quantizations": [
+                "fp8"
+              ],
+              "ignore": [
+                "Novita"
+              ]
+            }
+          }
+        },
+        "z-ai/glm-4.7": {
+          "options": {
+            "provider": {
+              "order": [
+                "z-ai",
+                "novita"
+              ],
+              "ignore": [
+                "chutes"
+              ]
+            }
+          }
+        },
+        "deepseek/deepseek-chat-v3.1": {
+          "options": {
+            "provider": {
+              "sort": "throughput",
+              "quantizations": [
+                "fp8"
+              ],
+              "ignore": []
+            }
+          }
+        },
+        "minimax/minimax-m2.1": {
+          "options": {
+            "provider": {
+              "sort": "throughput"
+            }
+          }
+        },
+        "xiaomi/mimo-v2-flash:free": {
+          "options": {
+            "provider": {
+              "sort": "throughput"
+            },
+            "parameters": {
+              "reasoning": {
+                "enabled": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "gh-cli-mcp": {
+      "type": "local",
+      "command": [
+        "gh-cli-mcp"
+      ],
+    },
+  }
+}

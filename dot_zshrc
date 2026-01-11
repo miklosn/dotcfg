@@ -1,0 +1,109 @@
+
+plugins=(git)
+
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+export HISTTIMEFORMAT="[%F %T] "
+setopt share_history 
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+autoload -U +X bashcompinit && bashcompinit
+autoload -U compinit && compinit
+
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+
+
+# darwin
+
+
+### direnv:
+eval "$(direnv hook zsh)"
+### end direnv
+#
+
+### gcloud:
+if [[ -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ]]; then
+  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+fi
+if [[ -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]]; then
+  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+fi
+### env gcloud
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
+
+export PATH="$HOME/bin:$PATH:$HOME/go/bin:/usr/local/sbin"
+
+alias mtrr="sudo mtr -T -P 443 -e -z "
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/mico/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+export NIXPKGS_ALLOW_UNFREE=1
+
+#eval "$(zellij setup --generate-completion zsh)"
+
+#eval "$(zoxide init zsh)"
+#alias cd="z"
+
+alias nvvim="NVIM_APPNAME=nvim-nvchad nvim"
+
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+compdef git config
+
+#eval "$(starship init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/gruvbox.omp.json)"
+
+export EDITOR=nvim
+
+export ZK_NOTEBOOK_DIR="/Users/mico/c/zk/"
+MODE_CURSOR_VIINS="#00ff00 blinking bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
+MODE_CURSOR_VICMD="green block"
+MODE_CURSOR_SEARCH="#ff00ff steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
+
+export PATH=/Users/c5394507/.cargo/bin:$PATH
+
+# opencode
+export PATH=/Users/c5394507/.opencode/bin:$PATH
+source /Users/c5394507/.config/op/plugins.sh
+[[ ! $PATH == */Users/c5394507/.fex/bin* ]] && export PATH="/Users/c5394507/.fex/bin:$PATH"
+export FEX_DEFAULT_COMMAND="fex --time-type modified"
+[ -f /Users/c5394507/.fex/.fex.zsh ] && source /Users/c5394507/.fex/.fex.zsh
+bindkey '^f' fex-widget
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/c5394507/.lmstudio/bin"
+# End of LM Studio CLI section
+
+export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(mise activate zsh)"
+
+# Task Master aliases added on 11/26/2025
+alias tm='task-master'
+alias taskmaster='task-master'
+
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}

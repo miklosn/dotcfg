@@ -1,0 +1,64 @@
+[credential "https://source.developers.google.com"]
+	helper = gcloud.sh
+[http]
+	cookiefile = /Users/mico/.gitcookies
+  #proxy = http://127.0.0.1:8888
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+
+[credential]
+	helper = osxkeychain
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
+[user]
+	name = Miklos Niedermayer
+	email = miklos.niedermayer@aliz.ai
+  signingkey = /Users/mico/.ssh/id_rsa.pub
+[commit]
+  gpgsign = false
+[gpg]
+	format = ssh
+[diff "sopsdiffer"]
+	textconv = sops -d
+[core]
+	excludesfile = ~/.gitignore
+
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
