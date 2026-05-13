@@ -3,6 +3,23 @@
 [http]
 	cookiefile = /Users/mico/.gitcookies
   #proxy = http://127.0.0.1:8888
+  #
+
+[alias]
+    # Difftastic aliases, so `git dlog` is `git log` with difftastic and so on.
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
+[alias]
+    # `git log` with patches shown with difftastic.
+    dl = -c diff.external=difft log -p --ext-diff
+
+    # Show the most recent commit with difftastic.
+    ds = -c diff.external=difft show --ext-diff
+
+    # `git diff` with difftastic.
+    dft = -c diff.external=difft diff
+
 
 [column]
 	ui = auto
@@ -12,12 +29,14 @@
 [tag]
 	sort = version:refname
 [init]
-        defaultBranch = main
+  defaultBranch = main
 [diff]
 	algorithm = histogram
 	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
+  external = difft
+
 [push]
         default = simple
         autoSetupRemote = true
@@ -27,11 +46,12 @@
         pruneTags = true
         all = true
 
-
 [credential]
 	helper = osxkeychain
-#[url "git@github.com:"]
-#	insteadOf = https://github.com/
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
 [user]
 	name = Miklos Niedermayer
 	email = miklos.niedermayer@aliz.ai
@@ -62,3 +82,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

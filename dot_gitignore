@@ -9,3 +9,4 @@ devenv.local.nix
 .op/
 AGENTS.md
 CLAUDE.md
+.wtp.yml

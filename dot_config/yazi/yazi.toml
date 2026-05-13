@@ -1,2 +1,21 @@
+[mgr]
+ratio = [1,2,4]
+
 [opener]
-edit = [{ run = 'hx "$@"', block = true }]
+edit = [{ run = 'nvim "$@"', block = true }]
+markdown = [
+  { run = 'glow -p "$@"', block = true, desc = "Preview with glow" },
+  { run = 'nvim "$@"', block = true, desc = "Edit with nvim" },
+]
+text = [
+  { run = 'nvim "$@"', block = true, desc = "Edit with nvim" },
+  { run = 'bat --paging=always "$@"', block = true, desc = "View with bat" },
+]
+
+[open]
+prepend_rules = [
+  { url = "*.md", use = "markdown" },
+  { url = "*.{yaml,yml}", use = "text" },
+  { mime = "text/*", use = "text" },
+  { mime = "application/json", use = "text" },
+]

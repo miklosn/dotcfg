@@ -1,197 +1,85 @@
---return {
---  {
---    --   "Yazeed1s/minimal.nvim",
---    "folke/tokyonight.nvim",
---  },
---  {
---    "LazyVim/LazyVim",
---    opts = {
---      colorscheme = "tokyonight",
---    },
---  },
---}
---
---
-
 return {
-  {
-    "aliqyan-21/darkvoid.nvim",
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    opts = {
-      transparent_background = false,
-    },
-  },
+  -- Tokyo Night (default)
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {
-      style = "storm", -- storm, moon, night, day
+      style = "night",
       transparent = false,
-    },
-  },
-  {
-    "EdenEast/nightfox.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      options = {
-        transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
       },
     },
   },
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      variant = "moon", -- auto, main, moon, or dawn
-      dark_variant = "moon",
-      dim_inactive_windows = false,
-      extend_background_behind_borders = true,
-    },
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    opts = {
-      transparent_mode = false,
-      contrast = "hard", -- can be "hard", "soft" or empty string
-    },
-  },
-  {
-    "projekt0n/github-nvim-theme",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("github-theme").setup({
-        options = {
-          transparent = false,
-        },
-      })
-    end,
-  },
-  {
-    "eldritch-theme/eldritch.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = false,
-    },
-  },
-  {
-    "slugbyte/lackluster.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "craftzdog/solarized-osaka.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    opts = {
-      colors = {
-        theme = {
-          all = {
-            ui = {
-              bg_gutter = "none",
-            },
-          },
-        },
-      },
-    },
-  },
-  {
-    "rktjmp/lush.nvim",
-    -- if you wish to use your own colorscheme:
-    -- { dir = '/absolute/path/to/colorscheme', lazy = true },
-  },
-  {
-    "nyoom-engineering/oxocarbon.nvim",
-    -- Add in any other configuration;
-    --   event = foo,
-    --   config = bar
-    --   end,
-  },
-  { "nvim-mini/mini.base16", version = false },
-  {
-    "tiagovla/tokyodark.nvim",
-    opts = {
-      -- custom options here
-    },
-    config = function(_, opts)
-      require("tokyodark").setup(opts) -- calling setup is optional
-    end,
-  },
-  {
-    "sainnhe/sonokai",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.g.sonokai_style = "andromeda" -- default, atlantis, andromeda, shusia, maia, espresso
-      vim.g.sonokai_better_performance = 1
-      vim.g.sonokai_transparent_background = 0
-    end,
-  },
-  {
-    "bluz71/vim-nightfly-colors",
-    name = "nightfly",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "bluz71/vim-moonfly-colors",
-    name = "moonfly",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "Mofiqul/dracula.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent_bg = false,
-    },
-  },
-  {
-    "ribru17/bamboo.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "multiplex", -- "vulgaris" (default), "multiplex", "light"
-      transparent = false,
-    },
-  },
-  {
-    "olimorris/onedarkpro.nvim",
-    priority = 1000,
-    opts = {
-      options = {
-        transparency = false,
-      },
-    },
-  },
-  {
-    "marko-cerovac/material.nvim",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.g.material_style = "deep ocean" -- darker, lighter, oceanic, palenight, deep ocean
-    end,
-  },
+
+  -- Ayu
+  { "Shatur/neovim-ayu", name = "ayu", lazy = true, opts = { mirage = false } },
+
+  -- Rose Pine
+  { "rose-pine/neovim", name = "rose-pine", lazy = true, opts = { variant = "main" } },
+
+  -- Catppuccin
+  { "catppuccin/nvim", name = "catppuccin", lazy = true, opts = { flavour = "mocha" } },
+
+  -- Kanagawa
+  { "rebelot/kanagawa.nvim", lazy = true, opts = { theme = "wave" } },
+
+  -- Gruvbox Material
+  { "sainnhe/gruvbox-material", lazy = true },
+
+  -- Everforest (Lua port)
+  { "neanias/everforest-nvim", name = "everforest", lazy = true },
+
+  -- Sonokai
+  { "sainnhe/sonokai", lazy = true },
+
+  -- Nord (Lua-native, actively maintained)
+  { "gbprod/nord.nvim", lazy = true },
+
+  -- One Dark
+  { "navarasu/onedark.nvim", lazy = true, opts = { style = "dark" } },
+
+  -- Nightfox (includes nightfox, duskfox, nordfox, carbonfox)
+  { "EdenEast/nightfox.nvim", lazy = true },
+
+  -- Dracula
+  { "Mofiqul/dracula.nvim", lazy = true },
+
+  -- GitHub Dark
+  { "projekt0n/github-nvim-theme", lazy = true },
+
+  -- Oxocarbon
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true },
+
+  -- Midnight (VS Code inspired)
+  { "dasupradyumna/midnight.nvim", lazy = true },
+
+  -- Material
+  { "marko-cerovac/material.nvim", lazy = true, opts = { style = "deep ocean" } },
+
+  -- Bamboo
+  { "ribru17/bamboo.nvim", lazy = true },
+
+  -- Cyberdream
+  { "scottmckendry/cyberdream.nvim", lazy = true },
+
+  -- Modus (Emacs-inspired, high contrast)
+  { "miikanissi/modus-themes.nvim", lazy = true },
+
+  -- Solarized Osaka (modern solarized by craftzdog)
+  { "craftzdog/solarized-osaka.nvim", lazy = true },
+
+  -- Nordic (warmer Nord variant)
+  { "AlexvZyl/nordic.nvim", lazy = true },
+
+  -- Set default colorscheme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "bamboo", -- Change this to any of the added colorschemes
+      colorscheme = "nordic",
     },
   },
 }
