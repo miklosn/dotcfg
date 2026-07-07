@@ -8,6 +8,9 @@ set -gx NIXPKGS_ALLOW_UNFREE 1
 set -gx CLOUDSDK_PYTHON_SITEPACKAGES 1
 set -gx ZK_NOTEBOOK_DIR /Users/mico/c/zk/
 
+# OTel telemetry identity for AI agents (Claude Code, Codex, etc.)
+set -gx OTEL_RESOURCE_ATTRIBUTES "enduser.id=miklos.niedermayer@aliz.ai"
+
 # ============================================================================
 # Tool Activations (Always Active)
 # ============================================================================

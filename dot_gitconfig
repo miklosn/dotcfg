@@ -48,10 +48,6 @@
 
 [credential]
 	helper = osxkeychain
-
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
 [user]
 	name = Miklos Niedermayer
 	email = miklos.niedermayer@aliz.ai
@@ -88,3 +84,8 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://github.tools.sap"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[url "git@github.com:"]
+	insteadOf = https://github.com/

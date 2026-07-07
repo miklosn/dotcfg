@@ -2,6 +2,7 @@
 
 CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$CONFIG_DIR/themes.sh"
+source "$CONFIG_DIR/kitty_themes.sh"
 
 THEME_NAME="$1"
 
@@ -31,6 +32,7 @@ fi
 
 echo "$THEME_NAME" > "$THEME_FILE"
 echo "Switching to theme: $THEME_NAME"
+sync_kitty_theme "$THEME_NAME"
 brew services restart sketchybar
 
 echo "✅ Theme switched to $THEME_NAME"

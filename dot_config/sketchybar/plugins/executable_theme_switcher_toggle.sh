@@ -1,6 +1,7 @@
 #!/opt/homebrew/bin/bash
 
 source "$CONFIG_DIR/themes.sh"
+source "$CONFIG_DIR/kitty_themes.sh"
 
 CURRENT_THEME=$(cat "$CONFIG_DIR/.theme" 2>/dev/null || echo "tokyo_night")
 
@@ -19,6 +20,9 @@ NEXT_THEME="${AVAILABLE_THEMES[$NEXT_INDEX]}"
 
 # Save theme
 echo "$NEXT_THEME" > "$CONFIG_DIR/.theme"
+
+# Sync kitty (all running instances) to the matching theme
+sync_kitty_theme "$NEXT_THEME"
 
 # Reload config (this sources the new theme and updates all items)
 sketchybar --reload
