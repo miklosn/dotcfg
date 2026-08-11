@@ -1,0 +1,10 @@
+onboarding = false
+[terminal]
+default_shell = "/opt/homebrew/bin/fish"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[ui.sound]
+enabled = false
