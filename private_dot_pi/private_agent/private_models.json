@@ -1,0 +1,235 @@
+{
+  "providers" : {
+    "lmstudio" : {
+      "api" : "openai-completions",
+      "apiKey" : "lmstudio",
+      "baseUrl" : "http:\/\/192.168.0.16:1234\/v1",
+      "compat" : {
+        "supportsDeveloperRole" : false,
+        "supportsReasoningEffort" : false
+      },
+      "models" : [
+        {
+          "id" : "qwen\/qwen3.6-35b-a3b",
+          "name" : "Qwen3.6 35B (LM Studio)"
+        }
+      ]
+    },
+    "mtplx" : {
+      "api" : "openai-completions",
+      "apiKey" : "mtplx-local",
+      "authHeader" : true,
+      "baseUrl" : "http:\/\/127.0.0.1:8000\/v1",
+      "compat" : {
+        "maxTokensField" : "max_tokens",
+        "supportsDeveloperRole" : false,
+        "supportsReasoningEffort" : false
+      },
+      "headers" : {
+        "x-mtplx-client" : "pi"
+      },
+      "models" : [
+        {
+          "contextWindow" : 131072,
+          "cost" : {
+            "cacheRead" : 0,
+            "cacheWrite" : 0,
+            "input" : 0,
+            "output" : 0
+          },
+          "id" : "mtplx-qwen36-27b-optimized-speed-fp16",
+          "input" : [
+            "text"
+          ],
+          "name" : "MTPLX mtplx-qwen36-27b-optimized-speed-fp16",
+          "reasoning" : true
+        }
+      ]
+    },
+    "openrouter" : {
+      "api" : "openai-completions",
+      "authHeader" : true,
+      "baseUrl" : "https:\/\/openrouter.ai\/api\/v1",
+      "apiKey" : "!cat ~/.config/llm/secrets/openrouter",
+      "headers" : {
+        "HTTP-Referer" : "https:\/\/pi.dev",
+        "X-Title" : "pi coding agent"
+      },
+      "compat" : {
+        "supportsDeveloperRole" : false,
+        "supportsReasoningEffort" : false
+      },
+      "models" : [
+        {
+          "id" : "~deepseek\/deepseek-flash-latest",
+          "contextWindow" : 1048576,
+          "maxTokens" : 32768,
+          "reasoning" : true,
+          "input" : [
+            "text"
+          ]
+        },
+        {
+          "id" : "~z-ai\/glm-flash-latest",
+          "contextWindow" : 1310720,
+          "maxTokens" : 32768,
+          "reasoning" : true,
+          "input" : [
+            "text"
+          ]
+        },
+        {
+          "id" : "qwen\/qwen3.8-flash",
+          "contextWindow" : 1000000,
+          "maxTokens" : 32768,
+          "reasoning" : true,
+          "input" : [
+            "text"
+          ]
+        },
+        {
+          "id" : "poolside\/laguna-s-2.1",
+          "contextWindow" : 1048576,
+          "maxTokens" : 32768,
+          "reasoning" : true,
+          "input" : [
+            "text"
+          ]
+        },
+        {
+          "id" : "poolside\/laguna-xs-2.1",
+          "contextWindow" : 262144,
+          "maxTokens" : 32768,
+          "reasoning" : true,
+          "input" : [
+            "text"
+          ]
+        }
+      ]
+    },
+    "hai" : {
+      "api" : "openai-completions",
+      "authHeader" : true,
+      "baseUrl" : "http:\/\/localhost:6655\/litellm\/v1",
+      "apiKey" : "!cat ~/.config/llm/secrets/hai",
+      "compat" : {
+        "supportsDeveloperRole" : false,
+        "supportsReasoningEffort" : false
+      },
+      "models" : [
+        {
+          "id" : "gemini-2.5-flash-lite",
+          "contextWindow" : 1000000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 9.54057312e-8,
+            "output" : 3.339200592e-7,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "gemini-3.1-flash-lite",
+          "contextWindow" : 1000000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 2.38514328e-7,
+            "output" : 1.2879773712e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "gpt-5.6-luna",
+          "contextWindow" : 1050000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 2.504400444e-7,
+            "output" : 1.0494630432e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "gpt-4.1-mini",
+          "contextWindow" : 1047576,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 3.100686264e-7,
+            "output" : 1.1806459236e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "gpt-5-mini",
+          "contextWindow" : 272000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 2.862171936e-7,
+            "output" : 1.6815260124e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "gemini-2.5-flash",
+          "contextWindow" : 1000000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 3.219943428e-7,
+            "output" : 1.9915946388e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "anthropic--claude-4.5-haiku",
+          "contextWindow" : 200000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 9.421315956e-7,
+            "output" : 4.3767379188e-6,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        },
+        {
+          "id" : "anthropic--claude-4.6-sonnet",
+          "contextWindow" : 1000000,
+          "maxTokens" : 16384,
+          "input" : [
+            "text"
+          ],
+          "cost" : {
+            "input" : 2.6594347572e-6,
+            "output" : 1.29632537268e-5,
+            "cacheRead" : 0,
+            "cacheWrite" : 0
+          }
+        }
+      ]
+    }
+  }
+}

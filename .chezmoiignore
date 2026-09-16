@@ -1,0 +1,2 @@
+.config/llm/secrets/*
+!.config/llm/secrets/README.md
