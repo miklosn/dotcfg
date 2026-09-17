@@ -1,0 +1,2 @@
+dot_config/llm/private_secrets/*
+!dot_config/llm/private_secrets/README.md
