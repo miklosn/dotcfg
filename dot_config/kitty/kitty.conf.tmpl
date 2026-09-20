@@ -1,4 +1,5 @@
 # vim:fileencoding=utf-8:foldmethod=marker
+# chezmoi:template:left-delimiter="[[" right-delimiter="]]"
 
 #font_family Iosevka
 #font_family PT Mono
@@ -380,7 +381,8 @@ hide_window_decorations titlebar-and-corners
 
 #: Advanced {{{
 
-shell /opt/homebrew/bin/fish
+# Explicit so a stale $SHELL from the login session can't override it
+shell [[ if eq .chezmoi.os "darwin" ]]/opt/homebrew/bin/fish[[ else ]]/usr/bin/fish[[ end ]]
 
 #: The shell program to execute. The default value of . means to use
 #: whatever shell is set as the default shell for the current user.

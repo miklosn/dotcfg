@@ -1,4 +1,6 @@
-/opt/homebrew/bin/brew shellenv | source
+if test -x /opt/homebrew/bin/brew
+    /opt/homebrew/bin/brew shellenv | source
+end
 # ============================================================================
 # Environment Variables (Always Active)
 # ============================================================================
@@ -34,13 +36,23 @@ if type -q mise
     fish_add_path --move $HOME/.local/share/mise/shims
 end
 
+# Default JDK (OpenJDK 21). Switch versions with: /usr/libexec/java_home -v <11|17|21|26>
+if test -x /usr/libexec/java_home
+    set -gx JAVA_HOME (/usr/libexec/java_home -v 21 2>/dev/null)
+    if test -n "$JAVA_HOME"
+        fish_add_path $JAVA_HOME/bin
+    end
+end
+
 # direnv - environment directory
 if type -q direnv
     direnv hook fish | source
 end
 
 # wtp - git worktree management
-wtp shell-init fish | source
+if type -q wtp
+    wtp shell-init fish | source
+end
 
 # nix integration
 if test -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'

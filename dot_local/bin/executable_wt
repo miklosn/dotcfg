@@ -87,7 +87,11 @@ cmd_path() {
 
 cmd_rm() {
   [ -n "${1:-}" ] || die "usage: wt rm <branch|path>"
-  local target="$1"; [ -d "$target" ] || target="$(cmd_path "$1")"
+  local target="$1" f; [ -d "$target" ] || target="$(cmd_path "$1")"
+  # our context symlinks are untracked; drop them so git does not refuse
+  for f in AGENTS.md CLAUDE.md .claude .wtp.yml; do
+    [ -L "$target/$f" ] && rm "$target/$f"
+  done
   git worktree remove "$target"
 }
 
