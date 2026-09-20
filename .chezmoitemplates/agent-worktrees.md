@@ -18,8 +18,8 @@ Rules:
   `<type>/<short-slug>` (feat, fix, chore, docs).
 - Leave the main checkout's branch and working tree untouched.
 - `wt new` links the gitignored agent context (AGENTS.md, CLAUDE.md, .claude)
-  into the worktree and registers it as a herdr workspace named
-  `<project>/<branch>`, so it shows up in the sidebar and on the phone.
+  into the worktree and registers it as a herdr workspace nested under the
+  main checkout's, so it shows up in the sidebar and on the phone.
 - Never `rm -rf` a worktree directory; use `wt rm`.
 - Small, throwaway edits that will not be committed (inspecting, scratch
   scripts) may stay in the current directory.
