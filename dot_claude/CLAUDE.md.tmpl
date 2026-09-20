@@ -1,0 +1,8 @@
+When wanting to interact with github, the gh cli should be used.
+Resolve its path with `command -v gh` rather than hardcoding one
+(macOS: /opt/homebrew/bin/gh, Linux: /usr/bin/gh).
+
+Read operations with gh should be fine, always seek confirmation
+before write operations.
+
+{{ template "agent-worktrees.md" . }}

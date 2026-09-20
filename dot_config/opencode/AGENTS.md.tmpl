@@ -1,0 +1,64 @@
+# PTY Plugin Usage
+
+The `opencode-pty` plugin enables background process management with interactive terminals.
+
+## Tools Available
+
+- `pty_spawn` - Create a new PTY session (command, args, workdir, env, title, notifyOnExit)
+- `pty_write` - Send input to a PTY (text, escape sequences like `\x03` for Ctrl+C)
+- `pty_read` - Read output buffer with pagination and optional regex filtering
+- `pty_list` - List all PTY sessions with status, PID, line count
+- `pty_kill` - Terminate a PTY, optionally cleanup the buffer
+
+## Common Use Cases
+
+### Start a dev server
+```
+pty_spawn: command="npm", args=["run", "dev"], title="Dev Server"
+```
+
+### Check server output
+```
+pty_read: id="pty_a1b2c3d4", limit=50
+```
+
+### Filter for errors
+```
+pty_read: id="pty_a1b2c3d4", pattern="error|ERROR", ignoreCase=true
+```
+
+### Send Ctrl+C to stop
+```
+pty_write: id="pty_a1b2c3d4", data="\x03"
+```
+
+### Run with exit notification
+```
+pty_spawn: command="npm", args=["run", "build"], title="Build", notifyOnExit=true
+```
+
+## Permissions
+
+The plugin respects OpenCode's bash permission settings. Configure commands in opencode.json:
+
+```json
+{
+  "permission": {
+    "bash": {
+      "npm run dev": "allow",
+      "npm run build": "allow",
+      "npm test *": "allow",
+      "cargo *": "allow",
+      "python *": "allow"
+    }
+  }
+}
+```
+
+**Note**: "ask" permissions are treated as "deny" for PTY commands since plugins cannot trigger permission prompts.
+
+## More Information
+
+See https://github.com/shekohex/opencode-pty for full documentation.
+
+{{ template "agent-worktrees.md" . }}
