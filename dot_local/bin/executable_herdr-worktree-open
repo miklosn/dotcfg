@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Register the current git worktree as a herdr workspace grouped under the
+# main checkout's workspace. Meant as a wtp post_create hook (runs inside the
+# new worktree); a no-op outside herdr or outside a linked worktree.
+set -euo pipefail
+command -v herdr >/dev/null || exit 0
+[ -n "${HERDR_SOCKET_PATH:-}" ] || [ -S "$HOME/.config/herdr/herdr.sock" ] || exit 0
+
+wt="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+common="$(git rev-parse --git-common-dir)"
+main="$(cd "$wt" && cd "$common/.." && pwd)"
+[ "$main" != "$wt" ] || exit 0   # not a linked worktree
+
+branch="$(git branch --show-current)"
+label="${branch:-$(basename "$wt")}"
+herdr worktree open --cwd "$main" --path "$wt" --label "$label" --no-focus >/dev/null 2>&1 \
+  || herdr workspace create --cwd "$wt" --label "$label" --no-focus >/dev/null 2>&1 || true
