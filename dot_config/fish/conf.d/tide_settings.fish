@@ -2,7 +2,7 @@
 # Tide stores config in universal variables, which chezmoi cannot manage directly;
 # this file re-applies them once per tide_settings_version bump.
 # Regenerate: fish -c 'for v in (set -nU | string match "tide_*"); echo "set -U $v" (string escape -- $$v); end'
-set -l tide_settings_version 1
+set -l tide_settings_version 2
 if test "$tide_settings_applied" != "$tide_settings_version"
     set -U tide_aws_bg_color normal
     set -U tide_aws_color magenta
@@ -22,7 +22,6 @@ if test "$tide_settings_applied" != "$tide_settings_version"
     set -U tide_cmd_duration_decimals 0
     set -U tide_cmd_duration_icon
     set -U tide_cmd_duration_threshold 3000
-    set -U tide_context_always_display false
     set -U tide_context_bg_color normal
     set -U tide_context_color_default magenta
     set -U tide_context_color_root red
@@ -90,7 +89,14 @@ if test "$tide_settings_applied" != "$tide_settings_version"
     set -U tide_node_icon 
     set -U tide_os_bg_color normal
     set -U tide_os_color normal
-    set -U tide_os_icon 
+    # Machine-specific: linux icon and always-visible user@host on non-mac boxes
+    if test (uname) = Darwin
+        set -U tide_os_icon 
+        set -U tide_context_always_display false
+    else
+        set -U tide_os_icon 
+        set -U tide_context_always_display true
+    end
     set -U tide_php_bg_color normal
     set -U tide_php_color cyan
     set -U tide_php_icon 
