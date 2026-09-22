@@ -1,0 +1,8 @@
+#!/bin/sh
+# Merge attribution-off keys into ~/.claude/settings.json, leaving the rest
+# (hooks, env, permissions) machine-specific. Empty stdin -> new file.
+exec jq -s '(.[0] // {}) + {
+  attribution: { commit: "", pr: "" },
+  includeCoAuthoredBy: false,
+  gitAttribution: false
+}'
